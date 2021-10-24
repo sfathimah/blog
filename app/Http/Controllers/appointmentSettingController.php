@@ -94,7 +94,9 @@ class appointmentSettingController extends Controller
     public function update_serv(Request $request, Appointmentsetting $AppointmentSetting)
     {
         $request->validate([
-            'service' => 'required'
+            'service' => 'required',
+            'TFactor' => 'required',
+            'duration' => 'required',
         ]);
 
         $AppointmentSetting->update($request->all());
