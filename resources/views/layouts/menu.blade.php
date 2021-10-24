@@ -36,7 +36,7 @@
                 <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record
             </a>
             <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
-                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings edit from master
+                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings
             </a>
         </li>
     </ul>
