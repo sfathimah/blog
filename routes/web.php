@@ -24,6 +24,9 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/meeting', 'MeetingController@index')->name('meeting');
+Route::get('/status/pending', 'PendingController@index')->name('pending');
+Route::get('/record', 'RecordController@index')->name('records');
 
 Route::get('/page', 'PageController@index')->name('pages.page');
 Route::put('/page', 'PageController@update')->name('pages.update');
@@ -54,6 +57,20 @@ Route::get('/symptom/{condition}/manage_rule_rel', 'SymptomController@manage_rul
 Route::get('/symptom/{rule_rel}/edit_rule_rel', 'SymptomController@edit_rule_rel')->name('symptoms.edit_rule_rel');
 Route::post('/symptom/{rule_rel}', 'SymptomController@update_rule_rel')->name('symptoms.update_rule_rel');
 Route::post('/symptom/destroy_rule_rel/{rule_rel}', 'SymptomController@destroy_rule_rel')->name('symptoms.destroy_rule_rel'); 
+
+/**for workload */
+Route::get('/workload/appointmentSetting', 'appointmentSettingController@index')->name('pages.workload.appointmentSetting');
+Route::get('/workload/create_serv', 'appointmentSettingController@create_serv')->name('pages.workload.create_serv');
+Route::post('/workload/store_serv', 'appointmentSettingController@store_serv')->name('pages.workload.store_serv'); 
+Route::get('/workload/{AppointmentSetting}/edit_serv', 'appointmentSettingController@edit_serv')->name('pages.workload.edit_serv');
+Route::put('/workload/{AppointmentSetting}/update_serv', 'appointmentSettingController@update_serv')->name('pages.workload.update_serv');
+Route::post('/workload/destroy_serv/{AppointmentSetting}', 'appointmentSettingController@destroy_serv')->name('pages.workload.destroy_serv'); 
+
+/** for update */
+Route::get('/status/updatestatus/{id}', 'PendingController@edit')->name('updateStatus');;
+Route::post('/done', 'MeetingController@store');
+Route::post('/done1', 'RecordController@store');
+Route::post('/updated', 'PendingController@update'); 
 
 
 
