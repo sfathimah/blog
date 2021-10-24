@@ -2,7 +2,7 @@
   
 namespace App\Http\Controllers;
   
-use App\Symptommmm;
+use App\Symptom;
 use App\Condition;
 use App\Prescription;
 use App\Rule_relation;
