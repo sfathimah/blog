@@ -33,7 +33,7 @@
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
-                <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record qqq
+                <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record
             </a>
             <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
                 <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings
