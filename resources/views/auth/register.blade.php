@@ -43,6 +43,19 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
+                                    <i class="cil-info"></i>
+                              </span>
+                            </div>
+                            <input type="text" class="form-control @error('icno') is-invalid @enderror"
+                                   name="icno" value="{{ old('icno') }}"
+                                   placeholder="IC No.">
+                            @error('icno')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
                                     <i class="cil-envelope-open"></i>
                                 </span>
                             </div>

@@ -11,37 +11,55 @@
 @section('content')
 <div class="container-fluid">
     <div class="col-6 m-auto">
+    <!-- <form action="{{ route('pages.update',1) }}" method="POST">
+        @csrf
+        @method('PUT')
+   
+         <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Name:</strong>
+                    <input type="text" name="name" value="{{ $user->name }}" class="form-control" placeholder="Name">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>ic:</strong>
+                    <input type="text" name="icno" value="{{ $user->icno }}" class="form-control" placeholder="IC">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+   
+    </form> -->
         <div class="card">
             <div class="card-header">My Profile</div>
             <div class="card-body">
-                <form action="" method="post">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text">Username</span></div>
-                            <input class="form-control" id="username3" type="text" name="username3"
-                                autocomplete="username">
-
-                        </div>
-                    </div>
+                <form action="{{ route('pages.update',1) }}" method="post">
+                @csrf
+                @method('PUT')
+                    
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">Full Name</span></div>
-                            <input class="form-control" id="name3" type="text" name="name3" autocomplete="name">
+                            <input class="form-control" id="name" type="text" name="name" autocomplete="name" value="{{ $user->name }}" required>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">IC No.</span></div>
-                            <input class="form-control" id="ic3" type="text" name="ic3" autocomplete="ic">
+                            <input class="form-control" id="icno" type="text" name="icno" autocomplete="icno" value="{{ $user->icno }}" required>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">D.O.B</span></div>
-                            <input class="form-control" id="date-input" type="date" name="date-input"
-                                placeholder="date">
+                            <input class="form-control" id="dob" type="date" name="dob"
+                                placeholder="date" value="{{ $user->dob }}" required>
 
                         </div>
                     </div>
@@ -50,14 +68,12 @@
                             <div class="input-group-prepend"><span class="input-group-text">Gender</span></div>
                             <div class="col-md-9 col-form-label">
                                 <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" id="inline-radio1" type="radio" value="option1"
-                                        name="inline-radios">
-                                    <label class="form-check-label" for="inline-radio1">Male</label>
+                                    <input class="form-check-input" id="gender1" type="radio"  name="gender" value="0" {{ ($user->gender == '0') ? 'checked' : '' }} required>
+                                    <label class="form-check-label" for="gender1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" id="inline-radio2" type="radio" value="option2"
-                                        name="inline-radios">
-                                    <label class="form-check-label" for="inline-radio2">Female</label>
+                                    <input class="form-check-input" id="gender2" type="radio" name="gender" value="1" {{ ($user->gender == '1') ? 'checked' : '' }} >
+                                    <label class="form-check-label" for="gender2">Female</label>
                                 </div>
                             </div>
                         </div>
@@ -66,23 +82,23 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">Email</span></div>
-                            <input class="form-control" id="email3" type="email" name="email3" autocomplete="email">
+                            <input class="form-control" id="email" type="email" name="email" autocomplete="email" value="{{ $user->email }}" required>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">Contact No.</span></div>
-                            <input class="form-control" id="contact3" type="text" name="contact3"
-                                autocomplete="contact">
+                            <input class="form-control" id="phone" type="text" name="phone"
+                                autocomplete="contact" value="{{ $user->phone }}" required>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">Address</span></div>
-                            <textarea class="form-control" id="textarea-input" name="textarea-input" rows="1"
-                                placeholder="" spellcheck="false"></textarea>
+                            <textarea class="form-control" id="address" name="address" rows="1"
+                                placeholder="" spellcheck="false" required>{{ $user->address }}</textarea>
 
                         </div>
                     </div>

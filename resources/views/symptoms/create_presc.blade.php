@@ -1,18 +1,28 @@
-@extends('products.layout')
-  
+@extends('layouts.app')
+
+@section('breadcrumb')
+<ol class="breadcrumb border-0 m-0">
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item">Manage Symptoms, Medical Conditions, Treatments/ Prescriptions</li>
+    <li class="breadcrumb-item active">Add Treatment/ Prescription</li>
+
+</ol>
+@endsection
+
 @section('content')
+<div class="container-fluid">
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Product</h2>
+            <h2>Add New Treatment/ Prescription</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('symptoms.index') }}"> Back</a>
         </div>
     </div>
 </div>
    
-@if ($errors->any())
+<!-- @if ($errors->any()) // nnti boleh guna ni utk disp error
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
         <ul>
@@ -21,22 +31,16 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif -->
    
-<form action="{{ route('products.store') }}" method="POST">
+<form action="{{ route('symptoms.store_presc') }}" method="POST">
     @csrf
   
-     <div class="row">
+     <div class="row mt-5">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
+                <strong>Treatment/ Prescription:</strong>
                 <input type="text" name="name" class="form-control" placeholder="Name">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -45,4 +49,5 @@
     </div>
    
 </form>
+</div>
 @endsection
