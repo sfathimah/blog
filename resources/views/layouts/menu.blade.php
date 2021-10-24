@@ -14,11 +14,6 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link c-active" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout
-    </a>
-</li>
-<li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link c-active" href="{{ route('meeting') }}">
         <i class="c-sidebar-nav-icon cil-calendar"></i>Book Meeting
     </a>
@@ -30,17 +25,24 @@
 </li>
 
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <svg class="c-sidebar-nav-icon">
-              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-puzzle"></use>
-            </svg> Settings</a>
-          <ul class="c-sidebar-nav-dropdown-items">
-          <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
-        <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record
-</a>
-<a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
-        <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings
-</a>
-</li></ul>
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle"
+        href="#">
+        <svg class="c-sidebar-nav-icon">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-puzzle"></use>
+        </svg> Settings</a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+                <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record
+            </a>
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
+                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings
+            </a>
         </li>
+    </ul>
+</li>
+<li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link c-active" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout
+    </a>
+</li>
