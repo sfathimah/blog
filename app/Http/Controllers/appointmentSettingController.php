@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointmentsetting;
+use App\Threshold;
 use Illuminate\Http\Request;
 
 class appointmentSettingController extends Controller
@@ -24,10 +25,11 @@ class appointmentSettingController extends Controller
      */
     public function index()
     {
-        $AppointmentSetting = Appointmentsetting::latest()->paginate(10);
+        $AppointmentSetting = Appointmentsetting::latest()->paginate(5);
+        $Threshold = Threshold::all();
        
-        return view('pages.workload.appointmentSetting',compact('AppointmentSetting'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('pages.workload.appointmentSetting',compact('AppointmentSetting', 'Threshold'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
 
        /**$AppointmentSetting = Appointmentsetting::all();
         return view('pages.workload.appointmentSetting'); */ 
@@ -58,14 +60,12 @@ class appointmentSettingController extends Controller
             
             'service' => 'required',
             'TFactor' => 'required',
-            'duration' => 'required',
         ]);
 
-        Appointmentsetting::create(
-            [ 
+        Appointmentsetting::create([ 
             'service' => $request->service,
-            'TFactor' => $request->TFactor,
-            'duration' => $request->duration ]);
+            'TFactor' => $request->TFactor
+        ]);
   
         return view('pages.workload.appointmentSetting')->with('successMsg','Details has been updated.');
    
@@ -74,6 +74,7 @@ class appointmentSettingController extends Controller
     {
         $request->validate([
             'service' => 'required',
+            'TFactor' => 'required',
         
         ]);
   
@@ -96,17 +97,40 @@ class appointmentSettingController extends Controller
         $request->validate([
             'service' => 'required',
             'TFactor' => 'required',
-            'duration' => 'required',
         ]);
 
         $AppointmentSetting->update($request->all());
-  
         return redirect()->route('pages.workload.appointmentSetting')
                         ->with('success','Service updated successfully');
     }
     public function edit_serv(Appointmentsetting $AppointmentSetting)
     {
         return view('pages.workload.edit_serv',compact('AppointmentSetting'));
+    }
+
+    public function update_thres(Request $request, Threshold $Threshold)
+    {
+        $request->validate([
+            'threshold' => 'required'
+        ]);
+  
+        $Threshold->update($request->all());
+   
+        return redirect()->route('pages.workload.appointmentSetting')
+                        ->with('success','Threshold updated successfully.');
+    }
+
+    public function update_newserv(Request $request, Appointmentsetting $AppointmentSetting)
+    {
+        $request->validate([
+            'service' => 'required',
+            'TFactor' => 'required',
+        ]);
+
+        $AppointmentSetting->update($request->all());
+        dd($AppointmentSetting);
+        return redirect()->route('pages.workload.appointmentSetting')
+                        ->with('success','Service updated successfully');
     }
 
 }

@@ -32,17 +32,20 @@
         </svg> Settings</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.medicalrecord.index') }}">
                 <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Record
             </a>
             <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
-                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload Settings
+                <i class="c-sidebar-nav-icon cil-window-restore"></i>Manage Workload Settings
+            </a>
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.schedule.fullcalender') }}">
+                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Dentist Schedule
             </a>
         </li>
     </ul>
 </li>
 <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link c-active" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout tukar master
+        <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout
     </a>
 </li>
