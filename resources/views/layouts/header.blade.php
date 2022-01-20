@@ -10,6 +10,9 @@
     <i class="c-icon c-icon-lg cil-menu"></i>
 </button>
 <ul class="c-header-nav mfs-auto">
+<ul class="header-nav me-4">
+    <label>Welcome!</label>
+</ul>
 </ul>
 <ul class="c-header-nav">
     <li class="c-header-nav-item dropdown">

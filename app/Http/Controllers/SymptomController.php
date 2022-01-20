@@ -27,6 +27,7 @@ class SymptomController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,7 +55,10 @@ class SymptomController extends Controller
 
     public function create_rule_rel(Condition $condition)
     {
-        return view('symptoms.create_rule_rel',compact('condition'));
+        $symptoms = Symptom::orderBy('name')
+        ->get();
+
+        return view('symptoms.create_rule_rel',compact('condition','symptoms'));
     }
   
     /**
@@ -112,7 +116,7 @@ class SymptomController extends Controller
                         ->with('success','Treatment/ Prescription created successfully.');
     }
 
-    public function store_rule_rel(Request $request)
+    public function store_rule_rel(Request $request, Condition $condition)
     {
         $request->validate([
             'cond_id' => 'required',
@@ -122,7 +126,7 @@ class SymptomController extends Controller
   
         Rule_relation::create($request->all());
    
-        return redirect()->route('symptoms.index')
+        return redirect()->route('symptoms.manage_rule_rel', $condition)
                         ->with('success','Related Symptom & CF added successfully.');
     }
    
@@ -187,9 +191,12 @@ class SymptomController extends Controller
         return view('symptoms.manage_rule_rel',compact('condition','rule_relations'));
     }
 
-    public function edit_rule_rel(Rule_relation $rule_rel)
+    public function edit_rule_rel(Condition $condition, Rule_relation $rule_rel)
     {
-        return view('symptoms.edit_rule_rel',compact('rule_rel'));
+        $symptoms = Symptom::orderBy('name')
+                                ->get();
+
+        return view('symptoms.edit_rule_rel',compact('rule_rel', 'condition','symptoms'));
     }
   
     /**
@@ -259,7 +266,7 @@ class SymptomController extends Controller
                         ->with('success','Medical Condition updated successfully');
     }
 
-    public function update_rule_rel(Request $request, Rule_relation $rule_rel)
+    public function update_rule_rel(Request $request, Rule_relation $rule_rel, Condition $condition)
     {
         $request->validate([
             'symp_id' => 'required',
@@ -268,7 +275,7 @@ class SymptomController extends Controller
 
         $rule_rel->update($request->all());
   
-        return redirect()->route('symptoms.index')
+        return redirect()->route('symptoms.manage_rule_rel', $condition)
                         ->with('success','Related Symptom updated successfully');
     }
 
@@ -312,11 +319,11 @@ class SymptomController extends Controller
                         ->with('success','Treatment/ Prescription deleted successfully');
     }
 
-    public function destroy_rule_rel(Rule_relation $rule_rel)
+    public function destroy_rule_rel(Condition $condition, Rule_relation $rule_rel)
     {
         $rule_rel->delete();
   
-        return redirect()->route('symptoms.index')
+        return redirect()->route('symptoms.manage_rule_rel', $condition)
                         ->with('success','Related Symptom deleted successfully');
     }
 }

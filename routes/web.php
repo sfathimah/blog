@@ -22,6 +22,8 @@ Route::resource('symptoms','SymptomController');
 
 Auth::routes();
 
+Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('admin');
+Route::get('/dentist/home', 'HomeController@dentistHome')->name('dentist.home')->middleware('dentist');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/meeting', 'MeetingController@index')->name('meeting');
@@ -52,11 +54,18 @@ Route::put('/symptom/{symptom}/update_symp', 'SymptomController@update_symp')->n
 Route::post('/symptom/destroy_symp/{symptom}', 'SymptomController@destroy_symp')->name('symptoms.destroy_symp'); 
 
 Route::get('/symptom/{condition}/create_rule_rel', 'SymptomController@create_rule_rel')->name('symptoms.create_rule_rel');
-Route::post('/symptom/store_rule_rel', 'SymptomController@store_rule_rel')->name('symptoms.store_rule_rel'); 
+Route::post('/symptom/{condition}/store_rule_rel', 'SymptomController@store_rule_rel')->name('symptoms.store_rule_rel'); 
 Route::get('/symptom/{condition}/manage_rule_rel', 'SymptomController@manage_rule_rel')->name('symptoms.manage_rule_rel');
-Route::get('/symptom/{rule_rel}/edit_rule_rel', 'SymptomController@edit_rule_rel')->name('symptoms.edit_rule_rel');
-Route::post('/symptom/{rule_rel}', 'SymptomController@update_rule_rel')->name('symptoms.update_rule_rel');
-Route::post('/symptom/destroy_rule_rel/{rule_rel}', 'SymptomController@destroy_rule_rel')->name('symptoms.destroy_rule_rel'); 
+Route::get('/symptom/edit_rule_rel/{condition}/{rule_rel}', 'SymptomController@edit_rule_rel')->name('symptoms.edit_rule_rel');
+Route::post('/symptom/update_rule_rel/{rule_rel}/{condition}', 'SymptomController@update_rule_rel')->name('symptoms.update_rule_rel');
+Route::post('/symptom/destroy_rule_rel/{condition}/{rule_rel}', 'SymptomController@destroy_rule_rel')->name('symptoms.destroy_rule_rel');
+
+Route::get('/symptom/{condition}/create_cond_presc', 'Rule_relController@create_cond_presc')->name('rule_rels.create_cond_presc');
+Route::post('/symptom/{condition}/store_cond_presc', 'Rule_relController@store_cond_presc')->name('rule_rels.store_cond_presc'); 
+Route::get('/symptom/{condition}/manage_cond_presc', 'Rule_relController@manage_cond_presc')->name('rule_rels.manage_cond_presc');
+Route::get('/symptom/edit_cond_presc/{condition}/{cond_presc}', 'Rule_relController@edit_cond_presc')->name('rule_rels.edit_cond_presc');
+Route::post('/symptom/update_cond_presc/{cond_presc}/{condition}', 'Rule_relController@update_cond_presc')->name('rule_rels.update_cond_presc');
+Route::post('/symptom/destroy_cond_presc/{condition}/{cond_presc}', 'Rule_relController@destroy_cond_presc')->name('rule_rels.destroy_cond_presc'); 
 
 /**for workload */
 Route::get('/workload/appointmentSetting', 'appointmentSettingController@index')->name('pages.workload.appointmentSetting');
@@ -67,13 +76,21 @@ Route::put('/workload/{AppointmentSetting}/update_serv', 'appointmentSettingCont
 Route::post('/workload/destroy_serv/{AppointmentSetting}', 'appointmentSettingController@destroy_serv')->name('pages.workload.destroy_serv'); 
 
 /** for update */
-Route::get('/status/updatestatus/{id}', 'PendingController@edit')->name('updateStatus');;
+Route::get('/status/updatestatus/{id}', 'PendingController@edit')->name('updateStatus');
 Route::post('/done', 'MeetingController@store');
 Route::post('/done1', 'RecordController@store');
 Route::post('/updated', 'PendingController@update'); 
 
+/** for diagnosis */
+Route::get('/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');
+Route::get('/get_symptoms_list','DiagnosisController@sympList_json');
+Route::get('/get_cond_suggest/{sel_symp}','DiagnosisController@cond_suggest');
+Route::get('/get_conditions_list','DiagnosisController@condList_json');
+Route::get('/get_presc_suggest/{sel_cond}','DiagnosisController@presc_suggest');
+Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 
-
+Route::get('/fullcalender', 'FullCalenderController@index')->name('pages.fullcalender');
+Route::post('/fullcalenderAjax', 'FullCalenderController@ajax');
 
 
 

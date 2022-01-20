@@ -8,7 +8,7 @@
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
     <li class="breadcrumb-item">Manage Symptoms, Medical Conditions, Treatments/ Prescriptions</li>
-    <li class="breadcrumb-item active">Add Related Symptom & CF</li>
+    <li class="breadcrumb-item active">Add Related Treatment/ Prescription & CF</li>
 
 </ol>
 @endsection
@@ -22,7 +22,7 @@
                     <a class="btn btn-dark cil-arrow-thick-left" href="{{ URL::previous() }}"></a>
                 </div>
                 <div class="col-11">
-                Add Symptom Related to <span style="color:#0585f2;">{{$condition->name}}</span>
+                Add Treatment/ Prescription Related to <span style="color:#0585f2;">{{$condition->name}}</span>
                 </div>
             </div>
         </h3>
@@ -40,7 +40,7 @@
     </div>
 @endif -->
    
-<form action="{{ route('symptoms.store_rule_rel', $condition) }}" method="POST">
+<form action="{{ route('rule_rels.store_cond_presc', $condition) }}" method="POST">
     @csrf
   
      <div class="row">
@@ -48,12 +48,12 @@
             <div class="form-group">
                 <input type="text" name="cond_id" value="{{ $condition->id }}" class="form-control" placeholder="Symptom" hidden>
 
-                <strong>Symptom:</strong>
-                <!-- <input type="text" name="symp_id" class="form-control" placeholder="Symptom"> -->
-                <select id="selectsearch" name="symp_id" class="form-select" aria-label="Default select example">
-                    <option selected>Select Symptom</option>
-                    @foreach ($symptoms as $symptom)
-                        <option value="{{ $symptom->id }}">{{ $symptom->name }}</option>
+                <strong>Treatment/ Prescription:</strong>
+                <!-- <input type="text" name="presc_id" class="form-control" placeholder="Treatment/ Prescription"> -->
+                <select id="selectsearch" name="presc_id" class="form-select" aria-label="Default select example">
+                    <option selected>Select Treatment/ Prescription</option>
+                    @foreach ($prescs as $presc)
+                        <option value="{{ $presc->id }}">{{ $presc->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -70,8 +70,6 @@
     </div>
    
 </form>
-</div>
-</div>
 </div>
 @endsection
 

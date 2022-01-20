@@ -18,12 +18,12 @@ class User extends Authenticatable
      */
     protected $table="users";
 
-    public function Role() {
-        return $this->belongsTo('App\Role', 'role_id');
-    }
+    // public function Role() {
+    //     return $this->belongsTo('App\Role', 'role_id');
+    // }
 
     protected $fillable = [
-        'name', 'icno', 'email','phone','address', 'password',
+        'name', 'icno', 'email','phone','address', 'password','user_type'
     ];
 
     /**

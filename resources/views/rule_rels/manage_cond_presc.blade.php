@@ -16,7 +16,7 @@
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
     <li class="breadcrumb-item">Manage Symptoms, Medical Conditions, Treatments/ Prescriptions</li>
-    <li class="breadcrumb-item active">Manage Related Symptoms</li>
+    <li class="breadcrumb-item active">Manage Related Treatments/ Prescriptions</li>
 
 </ol>
 @endsection
@@ -28,17 +28,19 @@
         <p>{{ $message }}</p>
     </div>
     @endif
+
     <div class="card">
-    <h3 class="card-header">
+        <h3 class="card-header">
             <div class="row">
             <div class="col-1">
                 <a class="btn btn-dark cil-arrow-thick-left" href="{{ route('symptoms.index') }}"></a>
             </div>
             <div class="col-11">
-                Manage Symptoms Related to <span style="color:#0585f2;">{{$condition->name}}</span>
+                Manage Treatments/ Prescriptions Related to <span style="color:#0585f2;">{{$condition->name}}</span>
             </div></div>
         </h3>
         <div class="card-body">
+
 
             <!-- @if ($errors->any()) // nnti boleh guna ni utk disp error
     <div class="alert alert-danger">
@@ -53,8 +55,8 @@
 
             <div class="row mb-2">
                 <div class="col-2 ml-auto">
-                    <a class="btn xbtn-block btn-lg btn-pill btn-success float-right font-weight-bolder cil-plus" type="button"
-                        href="{{ route('symptoms.create_rule_rel',$condition->id) }}"></a></div>
+                    <a class="btn xbtn-block btn-lg btn-pill btn-success float-right font-weight-bolder cil-plus"
+                        type="button" href="{{ route('rule_rels.create_cond_presc',$condition->id) }}"></a></div>
 
             </div>
             <table class="table table-responsive-sm xtable-bordered">
@@ -66,16 +68,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($rule_relations as $rule_relation)
-                    @if ($condition->id == $rule_relation->cond_id)
+                    @foreach ($cond_prescs as $cond_presc)
+                    @if ($condition->id == $cond_presc->cond_id)
                     <tr>
-                        <td>{{ $rule_relation->symp_name }}</td>
-                        <td>{{ $rule_relation->cf_value }}</td>
+                        <td>{{ $cond_presc->presc_name }}</td>
+                        <td>{{ $cond_presc->cf_value }}</td>
                         <td class="text-center">
-                            <form action="{{ route('symptoms.destroy_rule_rel',[$condition, $rule_relation->id]) }}" method="POST">
+                            <form action="{{ route('rule_rels.destroy_cond_presc',[$condition, $cond_presc->id]) }}"
+                                method="POST">
                                 <div class="xbtn-group" role="group" aria-label="Basic example">
                                     <a class="btn btn-info btn-lg cil-pencil"
-                                        href="{{ route('symptoms.edit_rule_rel',[$condition, $rule_relation->id]) }}"></a>
+                                        href="{{ route('rule_rels.edit_cond_presc',[$condition, $cond_presc->id]) }}"></a>
 
                                     @csrf
                                     @method('POST')

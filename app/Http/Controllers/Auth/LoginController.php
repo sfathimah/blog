@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,54 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+   
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+   
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->user_type == 'Admin') {
+                return redirect()->route('admin.home');
+            }
+            elseif (auth()->user()->user_type == 'Dentist') {
+                return redirect()->route('dentist.home');
+            }else{
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
+        }      
+    }
+    public function logout(Request $request) {
+        if(isset(Auth::user()->user_type)){
+            $role = Auth::user()->user_type; 
+        }else {
+            $role = '';
+        }
+        Auth::logout();
+        // Check user role
+        switch ($role) {
+            case 'Admin':
+                    // return redirect('/admin/login');
+                    return redirect('/');
+                break;
+            case 'Dentist':
+                return redirect('/');
+            break;
+            case 'User':
+                    return redirect('/');
+                break; 
+            default:
+                    return redirect('/home');
+                break;
+        }
     }
 }
