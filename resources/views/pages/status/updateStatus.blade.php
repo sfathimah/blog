@@ -3,6 +3,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{ route('pending') }}">View Meeting Status</a></li>
 <li class="breadcrumb-item active">Update Meeting Status</li>
 
 </ol>
@@ -22,12 +23,29 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <label>Current Meeting Status : {{$meeting->status}}</label><br>
+                            @php $i=$meeting->status;@endphp
+                            @php
+                                if($i=='Accepted'){
+                                    $bg='bg-success';
+                                    $text='text-white';
+                                }
+                                else if($i=='Pending'){
+                                    $bg='bg-warning';
+                                    $text='text-white';
+                                }
+                                else{
+                                    $bg='bg-danger';
+                                    $text='text-white';
+                                }
+                            @endphp
+
+                                <label>Current Meeting Status : <span class="{{$bg}} {{$text}}">&nbsp&nbsp&nbsp{{$meeting->status}}&nbsp&nbsp&nbsp</span></label><br>
                                 
                                 <select name="status" id="status" class="form-control">
-                                    <option value = "Pending">Pending</option>
-                                    <option value = "Accepted">Accepted</option>
-                                    <option value = "Rejected">Rejected</option>
+                                    
+                                <option class="bg-success text-white" value = "Accepted" <?php echo ('Accepted'== $meeting->status ? 'selected="selected"': ''); ?>>Accepted</option>
+                                    <option class="bg-danger text-white" value = "Rejected" <?php echo ('Rejected'== $meeting->status ? 'selected="selected"': ''); ?>>Rejected</option>
+                                    <option class="bg-warning text-white" <?php echo ('Pending'== $meeting->status ? 'selected="selected"': ''); ?>>Pending</option>
                                 </select>
                             </div>
                         </div>
@@ -42,9 +60,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 @endsection
 

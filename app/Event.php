@@ -3,10 +3,11 @@
 namespace App;
   
 use Illuminate\Database\Eloquent\Model;
-   
-class Appointmentsetting extends Model
+  
+class Event extends Model
 {
+  
     protected $fillable = [
-        'service', 'TFactor', 'duration'
+        'title', 'start', 'end'
     ];
 }

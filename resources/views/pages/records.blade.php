@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item active">medical record</li>
+    <li class="breadcrumb-item active">Manage Patients' Medical Record</li>
 </ol>
 @endsection
 
@@ -17,9 +17,9 @@ $resultSet = $mysqli-> query("Select id FROM patient");
 ?>
 
 <div class="container-fluid">
-    <div class="col-6 m-auto">
+    <div class="col-10 m-auto">
         <div class="card">
-            <div class="card-header">Medical Records</div>
+            <div class="card-header">Medical Records Management</div>
                 <div class="card-body">
                 @if(!empty($successMsg))
                 <div class="alert alert-success"> {{ $successMsg }}</div>
@@ -60,31 +60,41 @@ $resultSet = $mysqli-> query("Select id FROM patient");
                                         <th scope="row">Admitted to Hospital</th>
                                         <td><input type="radio" name="ath" value="1" id="y1"></td>
                                         <td><input type="radio" name="ath" value="0" id="n1"></td>
-                                        <td><input type="text" name="athNotes" id="athNotes" ></td>
+                                        <td>
+                                            <textarea class="col-10" name="athNotes" id="athNotes" style="height:70px;"></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Serious Illness</th>
                                         <td><input type="radio" name="si" value="1" id="y2"></td>
                                         <td><input type="radio" name="si" value="0" id="n2"></td>
-                                        <td><input type="text" name="siNotes" id="siNotes" ></td>
+                                        <td>
+                                            <textarea class="col-10" name="siNotes" id="siNotes" style="height:70px;"></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Current Medication</th>
                                         <td><input type="radio" name="cm" value="1" id="y3"></td>
                                         <td><input type="radio" name="cm" value="0" id="n3"></td>
-                                        <td><input type="text" name="cmNotes" id="cmNotes" ></td>
+                                        <td>
+                                            <textarea class="col-10" name="cmNotes" id="cmNotes" style="height:70px;"></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Allergies</th>
                                         <td><input type="radio" name="al" value="1" id="y4"></td>
                                         <td><input type="radio" name="al" value="0" id="n4"></td>
-                                        <td><input type="text" name="alNotes" id="alNotes" ></td>
+                                        <td>
+                                            <textarea class="col-10" name="alNotes" id="alNotes" style="height:70px;"></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Others</th>
                                         <td><input type="radio" name="ot" value="1" id="y5"></td>
                                         <td><input type="radio" name="ot" value="0" id="n5"></td>
-                                        <td><input type="text" name="otNotes" id="otNotes" ></td>
+                                        <td>
+                                            <textarea class="col-10" name="otNotes" id="otNotes" style="height:70px;"></textarea>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

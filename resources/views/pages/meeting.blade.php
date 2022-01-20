@@ -11,7 +11,7 @@
 @section('content')
 <?php
 $mysqli = NEW MySQLi('localhost','root','','crud7');
-$resultSet = $mysqli-> query("Select service FROM services");
+$resultSet = $mysqli-> query("Select service FROM appointmentsettings");
 
 $resultSet1 = $mysqli-> query("Select name FROM dentist");
 ?>
