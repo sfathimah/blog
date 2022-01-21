@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dentist.app')
 @push('page_css')
 <style>
     .tag-ctn {
@@ -263,7 +263,7 @@
 
     /* bg color card */
 
-    .bg-suggest{
+    .bg-suggest {
         background-color: #edfaf9 !important;
         color: black !important;
     }
@@ -288,6 +288,8 @@
         <div class="col-8 m-auto">
             <div class="card card-accent-success">
                 <div class="card-header">Diagnosis Aid Form</div>
+                <form action="{{ route('diagnosis.store_diagnosis') }}" method="POST">
+                @csrf
                 <div class="card-body">
                     <!-- <div class="card text-white bg-success">
                         <div class="card-header">Enter Symptoms :</div>
@@ -303,13 +305,14 @@
                     <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
                     <br>
                     <div class="text-right">
-                    <button id="btn_get_cond_suggest" type="submit" class="btn btn-success">Submit</button>
-</div>
+                        <button id="btn_get_cond_suggest" type="submit" class="btn btn-success">Submit</button>
+                    </div>
                     <div id="cond_suggestion">
                     </div>
                     <div id="presc_suggestion">
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="col-4 m-auto">
@@ -1943,7 +1946,7 @@
                 }
 
                 $("#cond_suggestion").append("<hr>");
-                var card = 
+                var card =
                     '<div class="card text-white bg-suggest">' +
                     '<div class="card-header">Possible Medical Conditions</div>' +
                     '<div class="card-body">' +
@@ -1954,8 +1957,8 @@
                     for (var i = 0; i < len; i++) {
                         var name = response[i][0];
                         var cf = response[i][1];
-   
-                     var tr_str = '<tr>' +
+
+                        var tr_str = '<tr>' +
                             "<td>" + (i + 1) + " </td>" +
                             "<td> " + name + "</td>" +
                             "<td> " + cf + "</td>" +
@@ -2003,7 +2006,7 @@
                 }
 
                 $("#presc_suggestion").append("<hr>");
-                var card = 
+                var card =
                     '<div class="card text-white bg-suggest">' +
                     '<div class="card-header">Possible Prescriptions</div>' +
                     '<div class="card-body">' +

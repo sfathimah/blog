@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class PageController extends Controller
@@ -27,15 +28,11 @@ class PageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
-        $list =  Page::where('id','1')
-        // ->where('status','!=','0')
-        // ->orderBy('created_at','desc')s
-        ->get()->first();  
-        // $list = User::where('id','1')->first();
-        $user =  $list;
-        return view('pages.page',compact('user'));
+        
+        return view('pages.page');
     }
 
     public function edit()
@@ -49,7 +46,9 @@ class PageController extends Controller
 
     public function update(Request $request)
     {
-        Page::whereId('1')->update([
+        $id = Auth::id();
+
+        Page::whereId($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],            
             // 'password' => Hash::make($data['password']),

@@ -81,13 +81,15 @@ Route::post('/done', 'MeetingController@store');
 Route::post('/done1', 'RecordController@store');
 Route::post('/updated', 'PendingController@update'); 
 
-/** for diagnosis */
-Route::get('/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');
+/** for diagnosis - Dentist */
+Route::get('/dentist/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');
 Route::get('/get_symptoms_list','DiagnosisController@sympList_json');
 Route::get('/get_cond_suggest/{sel_symp}','DiagnosisController@cond_suggest');
 Route::get('/get_conditions_list','DiagnosisController@condList_json');
 Route::get('/get_presc_suggest/{sel_cond}','DiagnosisController@presc_suggest');
 Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
+Route::post('/dentist/diagnosis/{condition}/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
+
 
 Route::get('/fullcalender', 'FullCalenderController@index')->name('pages.fullcalender');
 Route::post('/fullcalenderAjax', 'FullCalenderController@ajax');

@@ -9,7 +9,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('dentist.home') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('diagnosis.index') }}">
         <i class="c-sidebar-nav-icon cil-clipboard"></i>Diagnosis Aid Tool
     </a>
 </li>

@@ -175,9 +175,18 @@ class DiagnosisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_diagnosis(Request $request)
     {
-        //
+        $request->validate([
+            'sel_symp' => 'required',
+            'sel_cond' => 'required',
+            'sel_presc' => 'required'
+        ]);
+  
+        Diagnosis::create($request->all());
+   
+        return redirect()->route('diagnosis.index')
+                        ->with('success','Diagnosis saved successfully.');
     }
 
     /**
