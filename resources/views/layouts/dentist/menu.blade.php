@@ -14,7 +14,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('dentist.home') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('statement.index') }}">
         <i class="c-sidebar-nav-icon cil-playlist-add"></i>Generate Prescription <br>Statement
     </a>
 </li>

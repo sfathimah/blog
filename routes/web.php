@@ -90,9 +90,10 @@ Route::get('/dentist/get_presc_suggest/{sel_cond}','DiagnosisController@presc_su
 Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
 
+Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');
 
-Route::get('/fullcalender', 'FullCalenderController@index')->name('pages.fullcalender');
-Route::post('/fullcalenderAjax', 'FullCalenderController@ajax');
+
+
 
 
 
