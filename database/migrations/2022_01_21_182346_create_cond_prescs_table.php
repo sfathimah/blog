@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiagnosisTable extends Migration
+class CreateCondPrescsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDiagnosisTable extends Migration
      */
     public function up()
     {
-        Schema::create('diagnosis', function (Blueprint $table) {
+        Schema::create('cond_prescs', function (Blueprint $table) {
             $table->id();
-            $table->integer('dentist_id');
-            $table->integer('patient_id')->nullable();
-            $table->string('sel_symp');
-            $table->string('sel_cond');
-            $table->string('sel_presc');
+            $table->integer('cond_id');
+            $table->integer('presc_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateDiagnosisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnosis');
+        Schema::dropIfExists('cond_prescs');
     }
 }

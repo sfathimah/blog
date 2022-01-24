@@ -305,7 +305,7 @@
                     <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
                     <br>
                     <div class="text-right">
-                        <button id="btn_get_cond_suggest" type="submit" class="btn btn-success">Submit</button>
+                        <button id="btn_get_cond_suggest" type="button" class="btn btn-success">Submit</button>
                     </div>
                     <div id="cond_suggestion">
                     </div>
@@ -1977,7 +1977,7 @@
                 //html for input medical conditions
                 var str_input_cond = "<br><span>Enter Medical Conditions :</span><br><br>" +
                     '<input id="sel_cond" class="tag-ctn" style="width:400px;" type="text" name="sel_cond" /><br>' +
-                    '<div class="text-right"><button type="submit" class="btn btn-success btn_get_presc_suggest">Submit</button></div>'
+                    '<div class="text-right"><button type="button" class="btn btn-success btn_get_presc_suggest">Submit</button></div>'
 
                 '<br><div id="presc_suggestion">' +
                 "</div>";

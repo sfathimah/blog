@@ -7,6 +7,7 @@ use App\Cond_presc;
 use App\Symptom;
 use App\Condition;
 use App\Prescription;
+use App\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
