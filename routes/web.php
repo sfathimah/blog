@@ -91,6 +91,7 @@ Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
 
 Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');
+Route::post('/dentist/statement/store_statement', 'StatementController@store_statement')->name('statement.store_statement'); 
 
 
 

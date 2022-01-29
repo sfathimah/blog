@@ -25,23 +25,34 @@
         <div class="col-11 m-auto">
             <div class="card">
                 <div class="card-header card-accent-primary">Generate Prescription Statement</div>
+                
                 <div class="card-body">
+                <form action="{{ route('statement.store_statement') }}" method="POST">
+                @csrf
                     <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label" for="stateno">Statement No.</label>
+                        <!-- <label class="col-sm-2 col-form-label" for="stateno">Statement No.</label> -->
                         <div class="col-sm-7">
-                            <input class="form-control-plaintext" id="stateno" type="text" readonly value="xx">
+                            <!-- <input class="form-control-plaintext" id="stateno" type="text" readonly value="insert latest id +1" name="id"> -->
+                            <input class="form-control-plaintext" type="text" hidden value="{{ Auth::user()->id }}" name="dentist_id">
+                            <!-- <input class="form-control-plaintext" type="text" readonly value="" name="patient_id"> -->
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label" for="name">Patient Name</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="name" type="text">
+                            <select class="form-select" name="patient_id" aria-label="Default select example">
+                                <option selected>Select Patient</option>
+                                @foreach ($patients as $patient)
+                                    <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                @endforeach
+                            </select>
+                            <!-- <input class="form-control" id="name" type="text" name="patient_name"> -->
                         </div>
                     </div>
                     <div class="mb-5 row">
                         <label class="col-sm-2 col-form-label" for="date">Date</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="date" type="date">
+                            <input class="form-control" id="datePicker" type="date" name="date" readonly>
                         </div>
                     </div>
                     <div class="mb-3 mx-5 row">
@@ -64,11 +75,12 @@
                             </div>
                         </div>
                         <hr>
+                        </form>
                         <div class="col-auto ml-auto">
                             <a class="btn btn-lg btn-pill btn-info float-right font-weight-bolder cil-print mx-1"
                                 type="button" title="Print" href="{{ route('statement.index') }}"></a>
-                            <a class="btn btn-lg btn-pill btn-success float-right font-weight-bolder cil-check-alt mx-1"
-                                type="button" title="Save" href="{{ route('statement.index') }}"></a>
+                            <button class="btn btn-lg btn-pill btn-success float-right font-weight-bolder cil-check-alt mx-1"
+                                type="submit" title="Save"></button>
                         </div>
 
                     </div>
@@ -85,6 +97,8 @@
 
 <script>
 
+    document.getElementById('datePicker').valueAsDate = new Date();
+
     $.extend( true, $.fn.dataTable.defaults, {
         "searching": false,
         "paging":   false,
@@ -97,10 +111,10 @@
  
     $('#AddRow').on( 'click', function () {
         t.row.add( [
-            counter,
-            '<input class="form-control" type="text" placeholder="Enter Prescription">',
-            '<input class="form-control" type="text" placeholder="Enter Quantity">',
-            '<input class="form-control" type="text" placeholder="Enter Remark">'
+            '<input name="item_id[]" class="form-control" type="text" readonly value="'+counter+'">',
+            '<input name="presc_id[]" class="form-control" type="text" placeholder="Enter Prescription">',
+            '<input name="qty[]" class="form-control" type="text" placeholder="Enter Quantity">',
+            '<input name="remark[]" class="form-control" type="text" placeholder="Enter Remark">'
         ] ).draw( false );
  
         counter++;

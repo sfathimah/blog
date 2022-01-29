@@ -20,7 +20,9 @@ class CreateDiagnosisTable extends Migration
             $table->string('sel_symp');
             $table->string('sel_cond');
             $table->string('sel_presc');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+
         });
     }
 

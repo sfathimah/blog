@@ -16,9 +16,12 @@ class CreateStatementsTable extends Migration
         Schema::create('statements', function (Blueprint $table) {
             $table->id();
             $table->integer('dentist_id');
-            $table->integer('patient_id');
+            $table->integer('patient_id')->nullable();
+            $table->string('patient_name');
             $table->date('date');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+
         });
     }
 
