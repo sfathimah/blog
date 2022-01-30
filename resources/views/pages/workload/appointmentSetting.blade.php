@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">

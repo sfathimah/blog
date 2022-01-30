@@ -23,19 +23,24 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Manage Related Symptoms</h2>
-                <!-- ~~~ title patut tukar ke Manage Related Symptoms to (medical condition) -->
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('symptoms.index') }}"> Back</a>
-            </div>
-        </div>
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
     </div>
+    @endif
+    <div class="card">
+    <h3 class="card-header">
+            <div class="row">
+            <div class="col-1">
+                <a class="btn btn-dark cil-arrow-thick-left" href="{{ route('symptoms.index') }}"></a>
+            </div>
+            <div class="col-11">
+                Manage Symptoms Related to <span style="color:#0585f2;">{{$condition->name}}</span>
+            </div></div>
+        </h3>
+        <div class="card-body">
 
-    <!-- @if ($errors->any()) // nnti boleh guna ni utk disp error
+            <!-- @if ($errors->any()) // nnti boleh guna ni utk disp error
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
         <ul>
@@ -46,42 +51,45 @@
     </div>
 @endif -->
 
-<div class="row mb-2">
-                    <div class="col-2 ml-auto">
-                        <a class="btn btn-block btn-pill btn-success float-right" type="button"
-                            href="{{ route('symptoms.create_rule_rel',$condition->id) }}">Add</a></div>
+            <div class="row mb-2">
+                <div class="col-2 ml-auto">
+                    <a class="btn xbtn-block btn-lg btn-pill btn-success float-right font-weight-bolder cil-plus" type="button"
+                        href="{{ route('symptoms.create_rule_rel',$condition->id) }}"></a></div>
 
-                </div>
-    <table class="table table-responsive-sm table-bordered">
-        <thead>
-            <tr>
-                <th>Symptom</th>
-                <th>CF Value</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($rule_relations as $rule_relation)
-                @if ($condition->id == $rule_relation->cond_id)
-                <tr>
-                    <td>{{ $rule_relation->symp_name }}</td>
-                    <td>{{ $rule_relation->cf_value }}</td>
-                    <td>
-                        <form action="{{ route('symptoms.destroy_rule_rel',$rule_relation->id) }}" method="POST">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a class="btn btn-primary"
-                                                href="{{ route('symptoms.edit_rule_rel',$rule_relation->id) }}">Edit</a>
+            </div>
+            <table class="table table-responsive-sm xtable-bordered">
+                <thead>
+                    <tr>
+                        <th>Symptom</th>
+                        <th>CF Value</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($rule_relations as $rule_relation)
+                    @if ($condition->id == $rule_relation->cond_id)
+                    <tr>
+                        <td>{{ $rule_relation->symp_name }}</td>
+                        <td>{{ $rule_relation->cf_value }}</td>
+                        <td class="text-center">
+                            <form action="{{ route('symptoms.destroy_rule_rel',[$condition, $rule_relation->id]) }}" method="POST">
+                                <div class="xbtn-group" role="group" aria-label="Basic example">
+                                    <a class="btn btn-info btn-lg cil-pencil"
+                                        href="{{ route('symptoms.edit_rule_rel',[$condition, $rule_relation->id]) }}"></a>
 
-                                            @csrf
-                                            @method('POST')
+                                    @csrf
+                                    @method('POST')
 
-                                            <button type="submit" class="btn btn-danger">Delete</button></div>
-                                    </form>
-                    </td>
+                                    <button type="submit" class="btn btn-danger btn-lg cil-trash"></button></div>
+                            </form>
+                        </td>
 
-                </tr>
-                @endif
-            @endforeach
-        </tbody>
-    </table>
-    @endsection
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection

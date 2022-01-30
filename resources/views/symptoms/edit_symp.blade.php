@@ -12,19 +12,17 @@
 @section('content')
 <div class="container-fluid">
     <div class="card">
-        <h3 class="card-header">Edit Symptom</h3>
+    <h3 class="card-header">
+            <div class="row">
+            <div class="col-1">
+                <a class="btn btn-dark cil-arrow-thick-left" href="{{ route('symptoms.index') }}"></a>
+            </div>
+            <div class="col-11">
+                Edit Symptom
+            </div></div>
+        </h3>
 
         <div class="card-body">
-            <div class="row mb-5">
-                <div class="col-lg-12 margin-tb">
-                    <!-- <div class="pull-left">
-                        <h2>Edit Symptom</h2>
-                    </div> -->
-                    <div class="pull-right">
-                        <a class="btn btn-dark cil-arrow-thick-left" href="{{ route('symptoms.index') }}"></a>
-                    </div>
-                </div>
-            </div>
 
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -42,15 +40,15 @@
                 @method('PUT')
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-6">
                         <div class="form-group">
-                            <label><h5>Name :</h5></label>
-                            <input type="text" name="name" value="{{ $symptom->name }}" class="form-control"
+                        <strong>Name:</strong>
+                            <input type="text" name="name" value="{{ $symptom->name }}" class="form-control text-body"
                                 placeholder="Name">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                        <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </div>
 
