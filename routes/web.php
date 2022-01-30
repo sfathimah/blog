@@ -1,4 +1,8 @@
-<?php
+
+
+
+
+ <?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +30,6 @@ Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home')->middl
 Route::get('/dentist/home', 'HomeController@dentistHome')->name('dentist.home')->middleware('dentist');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/meeting', 'MeetingController@index')->name('meeting');
-Route::get('/status/pending', 'PendingController@index')->name('pending');
-Route::get('/record', 'RecordController@index')->name('records');
 
 Route::get('/page', 'PageController@index')->name('pages.page');
 Route::put('/page', 'PageController@update')->name('pages.update');
@@ -74,12 +75,38 @@ Route::post('/workload/store_serv', 'appointmentSettingController@store_serv')->
 Route::get('/workload/{AppointmentSetting}/edit_serv', 'appointmentSettingController@edit_serv')->name('pages.workload.edit_serv');
 Route::put('/workload/{AppointmentSetting}/update_serv', 'appointmentSettingController@update_serv')->name('pages.workload.update_serv');
 Route::post('/workload/destroy_serv/{AppointmentSetting}', 'appointmentSettingController@destroy_serv')->name('pages.workload.destroy_serv'); 
+Route::put('/workload/{AppointmentSetting}/update_newserv', 'appointmentSettingController@update_newserv')->name('pages.workload.update_newserv'); 
 
-/** for update */
+Route::put('/workload/{Threshold}/update_thres', 'appointmentSettingController@update_thres')->name('pages.workload.update_thres'); 
+
+/** for update status*/
 Route::get('/status/updatestatus/{id}', 'PendingController@edit')->name('updateStatus');
 Route::post('/done', 'MeetingController@store');
 Route::post('/done1', 'RecordController@store');
 Route::post('/updated', 'PendingController@update'); 
+Route::get('/status/pending', 'PendingController@index')->name('pending');
+
+/**for schedule */
+
+Route::get('/schedule/schedule', 'ScheduleController@index')->name('pages.schedule.schedule');
+Route::get('/schedule/fullcalender', 'FullCalenderController@index')->name('pages.schedule.fullcalender');
+Route::post('/schedule/fullcalenderAjax','FullCalenderController@ajax');
+
+
+/**for medical records */
+
+Route::get('/record', 'RecordController@index')->name('records');
+
+Route::get('/pages/medicalrecord/index', 'MedicalRecordController@index')->name('pages.medicalrecord.index');
+// Route::resource('/pages/medicalrecord/index','MedicalRecordController');
+Route::get('/medicalrecord/{id}/edit/','MedicalRecordController@edit');
+
+Route::post('/medicalrecord/store', 'MedicalRecordController@store')->name('pages.medicalrecord.store'); 
+Route::post('/medicalrecord/destroy/{Patient}', 'MedicalRecordController@destroy')->name('pages.medicalrecord.destroy');
+
+/**for booking meeting */
+
+Route::get('/meeting', 'MeetingController@index')->name('meeting');
 
 /** for diagnosis - Dentist */
 Route::get('/dentist/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');
@@ -90,13 +117,7 @@ Route::get('/dentist/get_presc_suggest/{sel_cond}','DiagnosisController@presc_su
 Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
 
+/** for statement - Dentist */
 Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');
 Route::post('/dentist/statement/store_statement', 'StatementController@store_statement')->name('statement.store_statement'); 
-
-
-
-
-
-
-
 

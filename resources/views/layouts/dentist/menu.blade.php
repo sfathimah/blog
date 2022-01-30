@@ -4,7 +4,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('dentist.home') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('pending') }}">
         <i class="c-sidebar-nav-icon cil-book"></i>Appointment History
     </a>
 </li>

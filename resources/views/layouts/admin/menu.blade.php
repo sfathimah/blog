@@ -14,12 +14,12 @@
          Appointment Settings</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
                 <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.schedule.fullcalender') }}">
                 <i class="c-sidebar-nav-icon cil-calendar-check"></i>Manage Dentists' Schedule
             </a>
         </li>
@@ -43,12 +43,12 @@
          Patients' Record <br>Management</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.medicalrecord.index') }}">
                 <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Records
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('records') }}">
+            <a class="c-sidebar-nav-link c-active" href="{{ route('admin.home') }}">
                 <i class="c-sidebar-nav-icon cil-user"></i>View Patients' Profile
             </a>
         </li>
