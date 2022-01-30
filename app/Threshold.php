@@ -4,9 +4,11 @@ namespace App;
   
 use Illuminate\Database\Eloquent\Model;
    
-class Appointmentsetting extends Model
+class Threshold extends Model
 {
     protected $fillable = [
-        'service', 'TFactor', 'duration'
+        'threshold'
     ];
+
+    protected $table = 'thresholds';
 }

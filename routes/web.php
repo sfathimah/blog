@@ -92,9 +92,7 @@ Route::get('/schedule/schedule', 'ScheduleController@index')->name('pages.schedu
 Route::get('/schedule/fullcalender', 'FullCalenderController@index')->name('pages.schedule.fullcalender');
 Route::post('/schedule/fullcalenderAjax','FullCalenderController@ajax');
 
-
 /**for medical records */
-
 Route::get('/record', 'RecordController@index')->name('records');
 
 Route::get('/pages/medicalrecord/index', 'MedicalRecordController@index')->name('pages.medicalrecord.index');
