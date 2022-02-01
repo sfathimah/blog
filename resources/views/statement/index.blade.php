@@ -40,7 +40,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label" for="name">Patient Name</label>
                         <div class="col-sm-7">
-                            <select class="form-select" name="patient_id" aria-label="Default select example">
+                            <select class="form-select" name="patient_id" aria-label="Default select example" required>
                                 <option selected>Select Patient</option>
                                 @foreach ($patients as $patient)
                                     <option value="{{ $patient->id }}">{{ $patient->name }}</option>
@@ -52,7 +52,7 @@
                     <div class="mb-5 row">
                         <label class="col-sm-2 col-form-label" for="date">Date</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="datePicker" type="date" name="date" readonly>
+                            <input class="form-control-plaintext" id="datePicker" type="date" name="date" readonly>
                         </div>
                     </div>
                     <div class="mb-3 mx-5 row">
@@ -111,9 +111,9 @@
  
     $('#AddRow').on( 'click', function () {
         t.row.add( [
-            '<input name="item_id[]" class="form-control" type="text" readonly value="'+counter+'">',
-            '<input name="presc_id[]" class="form-control" type="text" placeholder="Enter Prescription">',
-            '<input name="qty[]" class="form-control" type="text" placeholder="Enter Quantity">',
+            '<input name="item_id[]" class="form-control-plaintext" type="text" readonly value="'+counter+'">',
+            '<input name="presc_id[]" class="form-control" type="text" placeholder="Enter Prescription" required>',
+            '<input name="qty[]" class="form-control" type="text" placeholder="Enter Quantity" required>',
             '<input name="remark[]" class="form-control" type="text" placeholder="Enter Remark">'
         ] ).draw( false );
  
