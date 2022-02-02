@@ -14,12 +14,12 @@
          Appointment Settings</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.workload.appointmentSetting') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.workload.appointmentSetting') }}">
                 <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.schedule.fullcalender') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.schedule.fullcalender') }}">
                 <i class="c-sidebar-nav-icon cil-calendar-check"></i>Manage Dentists' Schedule
             </a>
         </li>
@@ -31,7 +31,7 @@
              Diagnosis Aid Settings</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('symptoms.index') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('symptoms.index') }}">
                 <i class="c-sidebar-nav-icon cil-healing"></i>Manage Symptoms, <br>Medical Conditions, <br>Treatments/ Prescriptions
             </a>
         </li>
@@ -43,12 +43,12 @@
          Patients' Record <br>Management</a>
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('pages.medicalrecord.index') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.medicalrecord.index') }}">
                 <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Records
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link c-active" href="{{ route('admin.home') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('admin.home') }}">
                 <i class="c-sidebar-nav-icon cil-user"></i>View Patients' Profile
             </a>
         </li>
@@ -88,7 +88,7 @@
     </ul>
 </li> -->
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link c-active" style="background: #c26a6a" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <a class="c-sidebar-nav-link xc-active" style="background: #c26a6a" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout
     </a>
 </li>

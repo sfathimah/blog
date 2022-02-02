@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Statement;
 use App\User;
 use App\Statement_data;
+use App\Prescription;
 
 class StatementController extends Controller
 {
@@ -16,7 +17,10 @@ class StatementController extends Controller
         ->where('user_type','User')
         ->get();
 
-        return view('statement.index', compact('patients'));
+        $prescs = Prescription::select('id', 'name')
+        ->get();
+
+        return view('statement.index', compact('patients','prescs'));
     }
 
     function debug_to_console($data, $context = 'Debug in Console') {
