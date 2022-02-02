@@ -25,7 +25,7 @@
 </li>
 
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link c-active" style="background: #c26a6a" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <a class="c-sidebar-nav-link xc-active" style="background: #c26a6a" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="c-sidebar-nav-icon cil-account-logout"></i>Logout
     </a>
 </li>

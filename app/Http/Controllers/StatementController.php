@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Statement;
 use App\User;
 use App\Statement_data;
+use App\Prescription;
 
 class StatementController extends Controller
 {
@@ -16,7 +17,22 @@ class StatementController extends Controller
         ->where('user_type','User')
         ->get();
 
-        return view('statement.index', compact('patients'));
+        $prescs = Prescription::select('id', 'name')
+        ->get();
+
+        return view('statement.index', compact('patients','prescs'));
+    }
+
+    function debug_to_console($data, $context = 'Debug in Console') {
+
+        // Buffering to solve problems frameworks, like header() in this and not a solid return.
+        ob_start();
+    
+        $output  = 'console.info(\'' . $context . ':\');';
+        $output .= 'console.log(' . json_encode($data) . ');';
+        $output  = sprintf('<script>%s</script>', $output);
+    
+        echo $output;
     }
 
     public function store_statement(Request $request)
@@ -38,12 +54,12 @@ class StatementController extends Controller
         $d = [];
         for($i=0;$i<count($data['item_id']);$i++)
         {
-        $d[]= array ('presc_id'=>$data[$i]['presc_id'],
-                        'qty'=>$data[$i]['qty'],
-                        'remark'=>$data[$i]['remark']);
+        $d[]= array ('presc_id'=>$data['presc_id'][$i],
+                        'qty'=>$data['qty'][$i],
+                        'remark'=>$data['remark'][$i]);
+        Statement_data::create($d[$i]);
         }
-        Statement_data::create($d);
-   
+        
         return redirect()->route('statement.index')
                         ->with('success','Prescription statement saved successfully.');
     }
