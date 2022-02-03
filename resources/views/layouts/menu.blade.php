@@ -14,7 +14,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('home') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('statement.history') }}">
         <i class="c-sidebar-nav-icon cil-description"></i>View Prescriptions
     </a>
 </li>

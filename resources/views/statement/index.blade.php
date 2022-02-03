@@ -2,29 +2,36 @@
 
 @push('page_css')
 <style>
-@media print {
-  /* body {
+    @media print {
+
+        /* body {
     background: transparent;
     color: black;
     font: normal 20pt/1 sans-serif;
     text-align: center;
   } */
-  button {display: none;}
-  .form {
-    border: 10px double black;
-    padding: 2em;
-      &:after {
-        font-family: "Fontawesome";
-        color: black;
-        content: "\f259";
-        padding-left: .5cm;
-      }
+        button {
+            display: none;
+        }
+
+        .form {
+            border: 10px double black;
+            padding: 2em;
+
+            &:after {
+                font-family: "Fontawesome";
+                color: black;
+                content: "\f259";
+                padding-left: .5cm;
+            }
+        }
+
+        @page {
+            size: Letter Landscape;
+            margin: 3cm;
+        }
     }
-  @page {
-    size: Letter Landscape;
-    margin: 3cm;
-  }
-}
+
 </style>
 @endpush
 
@@ -49,63 +56,65 @@
             <div class="card">
                 <div class="card-header card-accent-primary">Generate Prescription Statement</div>
 
-                <div class="card-body" id="printableArea">
-                <div id="printableArea">
-                    <form action="{{ route('statement.store_statement') }}" method="POST">
-                        @csrf
-                        <div class="mb-3 row">
-                            <!-- <label class="col-sm-2 col-form-label" for="stateno">Statement No.</label> -->
-                            <div class="col-sm-7">
-                                <!-- <input class="form-control-plaintext" id="stateno" type="text" readonly value="insert latest id +1" name="id"> -->
-                                <input class="form-control-plaintext" type="text" hidden value="{{ Auth::user()->id }}"
-                                    name="dentist_id">
-                                <!-- <input class="form-control-plaintext" type="text" readonly value="" name="patient_id"> -->
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label" for="name">Patient Name</label>
-                            <div class="col-sm-7">
-                                <select class="form-select" name="patient_id" aria-label="Default select example"
-                                    required>
-                                    <option selected>Select Patient</option>
-                                    @foreach ($patients as $patient)
-                                    <option value="{{ $patient->id }}">{{ $patient->name }}</option>
-                                    @endforeach
-                                </select>
-                                <!-- <input class="form-control" id="name" type="text" name="patient_name"> -->
-                            </div>
-                        </div>
-                        <div class="mb-5 row">
-                            <label class="col-sm-2 col-form-label" for="date">Date</label>
-                            <div class="col-sm-7">
-                                <input class="form-control-plaintext" id="datePicker" type="date" name="date" readonly>
-                            </div>
-                        </div>
-                        <div class="mb-3 mx-5 row">
-                            <table id="table1" class="table display">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Prescription</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Remark</th>
-                                    </tr>
-                                </thead>
-                                <div class="row mb-2">
-
-                            </table>
-                            <div class="row">
-                                <div class="text-center ml-auto mb-4">
-                                    <button class="btn btn-lg btn-pill btn-secondary font-weight-bolder cil-plus mx-1"
-                                        type="button" title="Add" id="AddRow"></button>
+                <div class="card-body">
+                    <!-- <div id="printableArea"> -->
+                        <form action="{{ route('statement.store_statement') }}" method="POST">
+                            @csrf
+                            <div class="mb-3 row">
+                                <!-- <label class="col-sm-2 col-form-label" for="stateno">Statement No.</label> -->
+                                <div class="col-sm-7">
+                                    <!-- <input class="form-control-plaintext" id="stateno" type="text" readonly value="insert latest id +1" name="id"> -->
+                                    <input class="form-control-plaintext" type="text" hidden
+                                        value="{{ Auth::user()->id }}" name="dentist_id">
+                                    <!-- <input class="form-control-plaintext" type="text" readonly value="" name="patient_id"> -->
                                 </div>
                             </div>
-                            <hr>
-                    </form>
-</div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label" for="name">Patient Name</label>
+                                <div class="col-sm-7">
+                                    <select class="form-select" name="patient_id" aria-label="Default select example"
+                                        required>
+                                        <option selected>Select Patient</option>
+                                        @foreach ($patients as $patient)
+                                        <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <input class="form-control" id="name" type="text" name="patient_name"> -->
+                                </div>
+                            </div>
+                            <div class="mb-5 row">
+                                <label class="col-sm-2 col-form-label" for="date">Date</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control-plaintext" id="datePicker" type="date" name="date"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 mx-5 row">
+                                <table id="table1" class="table display">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Prescription</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <div class="row mb-2">
+
+                                </table>
+                                <div class="row">
+                                    <div class="text-center ml-auto mb-4">
+                                        <button
+                                            class="btn btn-lg btn-pill btn-secondary font-weight-bolder cil-plus mx-1"
+                                            type="button" title="Add" id="AddRow"></button>
+                                    </div>
+                                </div>
+                                <hr>
+                        </form>
+                    <!-- </div> -->
                     <div class="col-auto ml-auto">
-                        <a class="btn btn-lg btn-pill btn-info float-right font-weight-bolder cil-print mx-1"
-                            type="button" title="Print" onclick="print()"></a>
+                        <!-- <a class="btn btn-lg btn-pill btn-info float-right font-weight-bolder cil-print mx-1"
+                            type="button" title="Print" xonclick="print()"></a> -->
                         <button
                             class="btn btn-lg btn-pill btn-success float-right font-weight-bolder cil-check-alt mx-1"
                             type="submit" title="Save"></button>
@@ -158,15 +167,15 @@
     });
 
     function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
+        document.body.innerHTML = printContents;
 
-     window.print();
+        window.print();
 
-     document.body.innerHTML = originalContents;
-}
+        document.body.innerHTML = originalContents;
+    }
 
 </script>
 @endpush

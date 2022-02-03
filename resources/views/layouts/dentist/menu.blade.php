@@ -19,7 +19,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('dentist.home') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('statement.dentist_history') }}">
         <i class="c-sidebar-nav-icon cil-notes"></i>Prescription History
     </a>
 </li>

@@ -9,6 +9,7 @@ use App\User;
 use App\Statement_data;
 use App\Prescription;
 
+
 class StatementController extends Controller
 {
     public function index()
@@ -21,6 +22,35 @@ class StatementController extends Controller
         ->get();
 
         return view('statement.index', compact('patients','prescs'));
+    }
+
+    public function statement_history()
+    {
+        $statements = DB::table('statements')
+        ->where('patient_id', auth()->user()->id)
+        ->join('users', 'users.id', '=', 'statements.dentist_id')
+            ->select('statements.*', 'users.name as dentist_name')
+            ->orderBy('date', 'DESC')
+            ->get();
+        
+
+        $this->debug_to_console($statements);
+
+        return view('statement.history', compact('statements'));
+    }
+
+    public function dentist_statement_history()
+    {
+        $statements = DB::table('statements')
+        ->where('dentist_id', auth()->user()->id)
+        ->join('users', 'users.id', '=', 'statements.patient_id')
+            ->select('statements.*', 'users.name as patient_name')
+            ->orderBy('date', 'DESC')
+            ->get();
+
+        $this->debug_to_console($statements);
+
+        return view('statement.dentist_history', compact('statements'));
     }
 
     function debug_to_console($data, $context = 'Debug in Console') {
