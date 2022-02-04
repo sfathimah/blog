@@ -118,4 +118,7 @@ Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_dia
 /** for statement - Dentist */
 Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');
 Route::post('/dentist/statement/store_statement', 'StatementController@store_statement')->name('statement.store_statement'); 
-
+Route::get('/statement/history', 'StatementController@statement_history')->name('statement.history');
+Route::get('/dentist/statement/history', 'StatementController@dentist_statement_history')->name('statement.dentist_history');
+// Route::get('/dentist/statement/view/{id}', 'StatementController@view_data_modal')->name('statement.view_data_modal');
+Route::get('/statement/view/{id}', 'StatementController@view_data_modal')->name('statement.view_data_modal');
