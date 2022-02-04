@@ -30,11 +30,8 @@ class StatementController extends Controller
         ->where('patient_id', auth()->user()->id)
         ->join('users', 'users.id', '=', 'statements.dentist_id')
             ->select('statements.*', 'users.name as dentist_name')
-            ->orderBy('date', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->get();
-        
-
-        $this->debug_to_console($statements);
 
         return view('statement.history', compact('statements'));
     }
@@ -45,10 +42,8 @@ class StatementController extends Controller
         ->where('dentist_id', auth()->user()->id)
         ->join('users', 'users.id', '=', 'statements.patient_id')
             ->select('statements.*', 'users.name as patient_name')
-            ->orderBy('date', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->get();
-
-        $this->debug_to_console($statements);
 
         return view('statement.dentist_history', compact('statements'));
     }
@@ -81,10 +76,13 @@ class StatementController extends Controller
 
         Statement::create($statement);
 
+        $latest_id = Statement::latest()->first()->id;
+
         $d = [];
         for($i=0;$i<count($data['item_id']);$i++)
         {
-        $d[]= array ('presc_id'=>$data['presc_id'][$i],
+        $d[]= array ('statement_id'=>$latest_id,
+                        'presc_id'=>$data['presc_id'][$i],
                         'qty'=>$data['qty'][$i],
                         'remark'=>$data['remark'][$i]);
         Statement_data::create($d[$i]);
@@ -92,5 +90,17 @@ class StatementController extends Controller
         
         return redirect()->route('statement.index')
                         ->with('success','Prescription statement saved successfully.');
+    }
+
+    public function view_data_modal($id)
+    {
+// $this->debug_to_console("masuk");
+    	$sdata = Statement_data::select('presc_id', 'qty', 'remark')
+        ->where('statement_id',$id)
+        ->get();
+
+	    return response()->json([
+	      'data' => $sdata
+	    ]);
     }
 }

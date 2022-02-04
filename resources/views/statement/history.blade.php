@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-11 m-auto">
             <div class="card">
-                <div class="card-header card-accent-primary">Prescription Statement History</div>
+                <div class="card-header card-accent-primaryx">Prescription Statement History</div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
@@ -33,19 +33,73 @@
                         <tbody>
                             @foreach ($statements as $statement)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ $loop->index + 1 }}</th>
                                 <td>{{ $statement->date }}</td>
                                 <td>{{ $statement->dentist_name }}</td>
-                                <td><a class="btn btn-info btn-lg cil-notes"
-                                            href="{{ route('statement.history') }}"></a></td>
-                            </tr>                            
+                                <td><a id="viewData" class="btn btn-info btn-lg cil-notes" href=""
+                                        data-id="{{ $statement->id }}"></a>
+                                </td>
+                            </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="view_modal" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLiveLabel">Prescriptions</h5>
+                    <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="insertdata"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
+
+@push('page_scripts')
+<script>
+    $(document).ready(function () {
+
+        $('#viewData').click(function (event) {
+
+            event.preventDefault();
+            var id = $(this).data('id');
+            $.get('view/' + id, function (data) {
+
+                var rows;
+                for (let i = 0; i < data.data.length; i++) {
+                    rows += '<tr><th scope="row">' + [i + 1] + '</th>' +
+                        '<td>' + data.data[i].presc_id + '</td>' +
+                        '<td>' + data.data[i].qty + '</td>' +
+                        '<td>' + data.data[i].remark + '</td>' +
+                        '</tr>';
+                }
+                var tabledata =
+                    '<table class="table">' +
+                    '<thead><tr><th scope="col">#</th><th scope="col">Prescription</th><th scope="col">Qty</th><th scope="col">Remark</th></tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    rows +
+                    '</tbody></table>';
+
+                $('#insertdata').html(tabledata);
+                $('#view_modal').modal('show');
+            });
+        });
+
+    });
+
+</script>
+@endpush
