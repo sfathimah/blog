@@ -49,7 +49,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link xc-active" href="{{ route('admin.home') }}">
+            <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.viewprofile') }}">
                 <i class="c-sidebar-nav-icon cil-user"></i>View Patients' Profile
             </a>
         </li>

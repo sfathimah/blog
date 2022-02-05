@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\Page;
+use App\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Pagination\Paginator;
@@ -60,21 +61,30 @@ class PageController extends Controller
             'dob' => $request['dob']
         ]);
         return redirect()->route('pages.page')
-                            ->with('success','Product updated successfully');
+                            ->with('success','Profile updated successfully');
         // return redirect('/page')->with('flash_message_success','User Profile successfully updated!');
     }
 
-    // public function update(Request $request, Page $page)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'icno' => 'required',
-    //     ]);
-  
-    //     $user->update($request->all());
-  
-    //     return redirect()->route('pages.page')
-    //                     ->with('success','Product updated successfully');
-    // }
+    public function view_profile()
+    {
+        $users = User::select('id', 'name', 'email')
+        ->where('user_type', 'User')
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        return view('pages.viewprofile', compact('users'));
+    }
+
+    public function view_data_modal($id)
+    {
+// $this->debug_to_console("masuk");
+    	$sdata = User::select('icno', 'dob', 'gender', 'phone', 'address')
+        ->whereId($id)
+        ->get();
+
+	    return response()->json([
+	      'data' => $sdata
+	    ]);
+    }
 
 }
