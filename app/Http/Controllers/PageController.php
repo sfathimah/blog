@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Page;
 use App\User;
+use App\Record;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Pagination\Paginator;
@@ -85,6 +86,62 @@ class PageController extends Controller
 	    return response()->json([
 	      'data' => $sdata
 	    ]);
+    }
+
+    public function records($id)
+    {
+        $records = Record::where('patientID',$id )->first();
+        //return $records;
+
+        return view('pages.records', compact('records'));
+
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'patientID' => 'required',
+            'ath' => 'required',
+            'si' => 'required',
+            'cm' => 'required',
+            'al' => 'required',
+            'ot' => 'required',
+        ]);
+  
+        Record::create($request->all());
+
+        return view('pages.viewprofile')->with('successMsg','Records has been updated .');;
+   
+        //  return redirect()->route('pages.meeting')
+        //                  ->with('success','Meeting booked successfully.');
+        //return redirect('/meeting');
+    }
+
+    public function save(Request $request, $id)
+    {
+        $request->validate([
+            'ath' => 'required',
+            'si' => 'required',
+            'cm' => 'required',
+            'al' => 'required',
+            'ot' => 'required',
+        ]);
+        $records = Record::findOrFail($id);   
+        $records->update($request->all());
+
+        $users = User::select('id', 'name', 'email')
+        ->where('user_type', 'User')
+            ->orderBy('created_at', 'ASC')
+            ->get();
+
+        return view('pages.viewprofile', compact('users'))->with('success','Medical records updated successfully.');
+    }
+    public function viewrecords($id)
+    {
+        //$patientid = Auth::id();
+        $records = Record::where('patientID',$id)->first();   
+
+        //list($role_list) = $this->PCS();
+        return view('pages.viewrecords', compact('records'));
     }
 
 }
