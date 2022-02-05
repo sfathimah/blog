@@ -285,13 +285,13 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-8 m-auto">
+        <div class="col-8 m-autox">
             <div class="card card-accent-success">
-                <div class="card-header">Diagnosis Aid Form</div>
+                <div class="card-header font-monospace font-lg">Diagnosis Aid Form</div>
                 <form action="{{ route('diagnosis.store_diagnosis') }}" method="POST">
-                @csrf
-                <div class="card-body">
-                    <!-- <div class="card text-white bg-success">
+                    @csrf
+                    <div class="card-body">
+                        <!-- <div class="card text-white bg-success">
                         <div class="card-header">Enter Symptoms :</div>
                         <div class="card-body">
                             <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
@@ -301,24 +301,48 @@
                             </div>
                         </div>
                     </div> -->
-                    <span>Enter Symptoms :</span><br><br>
-                    <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
-                    <br>
-                    <div class="text-right">
-                        <button id="btn_get_cond_suggest" type="button" class="btn btn-success">Submit</button>
+                        <span>Enter Symptoms :</span><br><br>
+                        <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
+                        <br>
+                        <div class="text-right">
+                            <button id="btn_get_cond_suggest" type="button" class="btn btn-success">Submit</button>
+                        </div>
+                        <div id="cond_suggestion">
+                        </div>
+                        <div id="presc_suggestion">
+                        </div>
                     </div>
-                    <div id="cond_suggestion">
-                    </div>
-                    <div id="presc_suggestion">
-                    </div>
-                </div>
                 </form>
             </div>
         </div>
         <div class="col-4 m-auto">
             <div class="card border-info">
-                <div class="card-header">Summary</div>
+                <div class="card-header font-monospace font-lg">Diagnosis Details</div>
                 <div class="card-body">
+                    <div class="mb-2 row">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="date">Date :</label>
+                        <div class="col-sm-7">
+                            <input class="form-control-plaintext" id="datePicker" type="date" name="date" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2x col-form-label font-weight-bold" for="name">Patient Name :</label>
+                        <div class="col-sm-7x">
+                            <select class="form-select" name="patient_id" aria-label="Default select example" required>
+                                <option value="" selected>Select Patient</option>
+                                @foreach ($patients as $patient)
+                                <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label class="col-sm-4x col-form-label font-weight-bold" for="date">Notes :</label>
+                        <div class="col-sm-7x">
+                            <textarea class="form-control" name="notes" rows="5"
+                                placeholder="Add notes here..." spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -329,6 +353,9 @@
 
 @push('page_scripts')
 <script>
+    document.getElementById('datePicker').valueAsDate = new Date();
+
+
     /**
      * All auto suggestion boxes are fucked up or badly written.
      * This is an attempt to create something that doesn't suck...

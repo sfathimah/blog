@@ -31,7 +31,7 @@
 
 @section('content')
 <?php
-        $mysqli = NEW MySQLi('localhost','root','','dentalsystem');
+        $mysqli = NEW MySQLi('localhost','root','','crud7');
         $resultSet1 = $mysqli-> query("Select name, empid FROM dentist");
     ?>
 

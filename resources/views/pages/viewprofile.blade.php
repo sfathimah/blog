@@ -80,13 +80,20 @@
             var id = $(this).data('id');
             $.get('profiles/view/' + id, function (data) {
 
+                if (data.data[0].gender = 0){
+                    var gender = "Male";
+                }
+                else{
+                    var gender = "Female";
+                }
+
                 var tabledata =
                     '<table class="table"><tbody>' +
                     '<tr><th scope="col">Name</th><td scope="col">' + data.data[0].name + '</td></tr>' +
                     '<tr><th scope="col">Email</th><td scope="col">' + data.data[0].email + '</td></tr>' +
                     '<tr><th scope="col">IC No.</th><td scope="col">' + data.data[0].icno + '</td></tr>' +
                     '<tr><th scope="col">D.O.B</th><td scope="col">' + data.data[0].dob + '</td></tr>' +
-                    '<tr><th scope="col">Gender</th><td scope="col">' + data.data[0].gender + '</td></tr>' +
+                    '<tr><th scope="col">Gender</th><td scope="col">' + gender + '</td></tr>' +
                     '<tr><th scope="col">Phone No.</th><td scope="col">' + data.data[0].phone + '</td></tr>' +
                     '<tr><th scope="col">Address</th><td scope="col">' + data.data[0].address + '</td></tr>' +
                     
