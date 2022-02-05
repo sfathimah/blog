@@ -36,10 +36,12 @@
                                 <th scope="row">{{ $loop->index + 1 }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td class="text-center"><a class="viewData btn btn-primary btn-lg cil-notes font-sm" href=""
+                                <td class="text-center"><a class="viewData btn btn-success btn-lg cil-notes font-sm" href=""
                                         data-id="{{ $user->id }}"></a>
-                                    <a class="btn btn-info btn-lg cil-pencil font-sm"
-                                        href="{{ route('pages.viewprofile',$user->id) }}">  Medical Record</a>
+                                        <a class="btn btn-primary btn-lg font-sm"
+                                        href="{{ route('pages.viewrecords',$user->id) }}">  View Medical Record</a>
+                                    <a class="btn btn-info btn-lg font-sm"
+                                        href="{{ route('pages.records',$user->id) }}">  Manage Medical Record</a>
                                 </td>
                             </tr>
                             @endforeach

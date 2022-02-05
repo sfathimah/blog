@@ -118,7 +118,7 @@ class appointmentSettingController extends Controller
         ]);
 
         $AppointmentSetting->update($request->all());
-        dd($AppointmentSetting);
+        
         return redirect()->route('pages.workload.appointmentSetting')
                         ->with('success','Service updated successfully');
     }

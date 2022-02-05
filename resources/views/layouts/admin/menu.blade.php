@@ -16,12 +16,12 @@
     <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.workload.appointmentSetting') }}">
-                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Workload
+                <i class="c-sidebar-nav-icon cil-chart-pie"></i>Manage Task Workload <br> and Threshold
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.schedule.index') }}">
-                <i class="c-sidebar-nav-icon cil-people"></i>Manage Dentist
+                <i class="c-sidebar-nav-icon cil-people"></i>Manage Dentist <br>and Monthly Schedule
             </a>
         </li>
     </ul>
@@ -41,13 +41,8 @@
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle"
         href="#">
         <i class="c-sidebar-nav-icon cil-address-book"></i>
-         Patients' Record <br>Management</a>
+         Patients' Data <br>Management</a>
     <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.medicalrecord.index') }}">
-                <i class="c-sidebar-nav-icon cil-medical-cross"></i>Manage Medical Records
-            </a>
-        </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.viewprofile') }}">
                 <i class="c-sidebar-nav-icon cil-user"></i>View Patients' Profile
