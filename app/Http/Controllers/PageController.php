@@ -78,7 +78,7 @@ class PageController extends Controller
     public function view_data_modal($id)
     {
 // $this->debug_to_console("masuk");
-    	$sdata = User::select('icno', 'dob', 'gender', 'phone', 'address')
+    	$sdata = User::select('name','email','icno', 'dob', 'gender', 'phone', 'address')
         ->whereId($id)
         ->get();
 

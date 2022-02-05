@@ -27,7 +27,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,8 +36,10 @@
                                 <th scope="row">{{ $loop->index + 1 }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td><a id="viewData" class="btn btn-info btn-lg cil-notes" href=""
+                                <td class="text-center"><a class="viewData btn btn-primary btn-lg cil-notes font-sm" href=""
                                         data-id="{{ $user->id }}"></a>
+                                    <a class="btn btn-info btn-lg cil-pencil font-sm"
+                                        href="{{ route('pages.viewprofile',$user->id) }}">  Medical Record</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -72,21 +74,21 @@
 <script>
     $(document).ready(function () {
 
-        $('#viewData').click(function (event) {
+        $('.viewData').click(function (event) {
 
             event.preventDefault();
             var id = $(this).data('id');
             $.get('profiles/view/' + id, function (data) {
-            console.log(data);
+
                 var tabledata =
                     '<table class="table"><tbody>' +
-                    '<tr><th scope="col">Name</th><td scope="col">' + data.data.name + '</td>' +
-                    '<th scope="col">Email</th><td scope="col">' + data.data.email + '</td></tr>' +
-                    '<th scope="col">IC No.</th><td scope="col">' + data.data.icno + '</td></tr>' +
-                    '<th scope="col">D.O.B</th><td scope="col">' + data.data.dob + '</td></tr>' +
-                    '<th scope="col">Gender</th><td scope="col">' + data.data.gender + '</td></tr>' +
-                    '<th scope="col">Phone No.</th><td scope="col">' + data.data.phone + '</td></tr>' +
-                    '<th scope="col">Address</th><td scope="col">' + data.data.address + '</td></tr>' +
+                    '<tr><th scope="col">Name</th><td scope="col">' + data.data[0].name + '</td></tr>' +
+                    '<tr><th scope="col">Email</th><td scope="col">' + data.data[0].email + '</td></tr>' +
+                    '<tr><th scope="col">IC No.</th><td scope="col">' + data.data[0].icno + '</td></tr>' +
+                    '<tr><th scope="col">D.O.B</th><td scope="col">' + data.data[0].dob + '</td></tr>' +
+                    '<tr><th scope="col">Gender</th><td scope="col">' + data.data[0].gender + '</td></tr>' +
+                    '<tr><th scope="col">Phone No.</th><td scope="col">' + data.data[0].phone + '</td></tr>' +
+                    '<tr><th scope="col">Address</th><td scope="col">' + data.data[0].address + '</td></tr>' +
                     
                     '</tbody></table>';
 

@@ -36,7 +36,7 @@
                                 <th scope="row">{{ $loop->index + 1 }}</th>
                                 <td>{{ $statement->date }}</td>
                                 <td>{{ $statement->dentist_name }}</td>
-                                <td><a id="viewData" class="btn btn-info btn-lg cil-notes" href=""
+                                <td><a class="viewData btn btn-info btn-lg cil-notes" href=""
                                         data-id="{{ $statement->id }}"></a>
                                 </td>
                             </tr>
@@ -72,7 +72,7 @@
 <script>
     $(document).ready(function () {
 
-        $('#viewData').click(function (event) {
+        $('.viewData').click(function (event) {
 
             event.preventDefault();
             var id = $(this).data('id');
