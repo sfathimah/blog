@@ -10,6 +10,7 @@ use App\Prescription;
 use App\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class DiagnosisController extends Controller
 {
@@ -20,7 +21,11 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
-        return view('diagnosis.index');
+        $patients = User::select('id', 'name')
+        ->where('user_type','User')
+        ->get();
+
+        return view('diagnosis.index', compact('patients'));
     }
 
     public function sympList_json()

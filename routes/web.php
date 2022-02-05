@@ -33,6 +33,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/page', 'PageController@index')->name('pages.page');
 Route::put('/page', 'PageController@update')->name('pages.update');
+Route::get('/profiles', 'PageController@view_profile')->name('pages.viewprofile');
+Route::get('/profiles/view/{id}', 'PageController@view_data_modal')->name('pages.view_profile');
+
 
 Route::get('/symptom', 'SymptomController@index')->name('symptoms.index');
 
