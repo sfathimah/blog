@@ -101,7 +101,9 @@ Route::get('/schedule/create', 'FullCalenderController@create')->name('pages.sch
 Route::post('/schedule/store', 'FullCalenderController@store')->name('pages.schedule.store'); 
 
 /**for medical records */
-Route::get('/record', 'RecordController@index')->name('records');
+Route::post('/pages/save/{id}', 'PageController@save')->name('pages.save'); 
+Route::get('/pages/viewrecords/{id}', 'PageController@viewrecords')->name('pages.viewrecords');
+Route::get('/pages/records/{id}', 'PageController@records')->name('pages.records');
 Route::get('/pages/medicalrecord/index', 'MedicalRecordController@index')->name('pages.medicalrecord.index');
 // Route::resource('/pages/medicalrecord/index','MedicalRecordController');
 Route::get('/medicalrecord/{id}/edit/','MedicalRecordController@edit');

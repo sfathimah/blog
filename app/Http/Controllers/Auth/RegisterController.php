@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Record;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -65,6 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = User::select('id')->orderBy('id', 'desc')->first();
+        $userID = $user->id;
+        $newID = $userID+1;
+
+        Record::create(
+            [
+                'patientID' => $newID, 
+            ]);
+       
         return User::create([
             'name' => $data['name'],
             'icno' => $data['icno'],
