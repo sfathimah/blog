@@ -24,6 +24,18 @@ class StatementController extends Controller
         return view('statement.index', compact('patients','prescs'));
     }
 
+    public function index_int($diagnosis_id)
+    {
+        $patients = User::select('id', 'name')
+        ->where('user_type','User')
+        ->get();
+
+        $prescs = Prescription::select('id', 'name')
+        ->get();
+
+        return view('statement.index_int', compact('patients','prescs','diagnosis_id'));
+    }
+
     public function statement_history()
     {
         $statements = DB::table('statements')
@@ -74,9 +86,9 @@ class StatementController extends Controller
         $statement = $request->only('dentist_id','patient_id','patient_name','date');
         $data = $request->only('item_id','presc_id','qty','remark');
 
-        Statement::create($statement);
+        $new = Statement::create($statement);
 
-        $latest_id = Statement::latest()->first()->id;
+        $latest_id = $new->id;
 
         $d = [];
         for($i=0;$i<count($data['item_id']);$i++)

@@ -18,7 +18,7 @@ class CreateMeetingslotsTable extends Migration
             $table->date('date');
             $table->string('dentistid');
             $table->string('slot');
-            $table->int('booked');
+            // $table->int('booked');
             $table->timestamps();
         });
     }

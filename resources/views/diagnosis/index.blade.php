@@ -291,16 +291,10 @@
                 <form action="{{ route('diagnosis.store_diagnosis') }}" method="POST">
                     @csrf
                     <div class="card-body">
-                        <!-- <div class="card text-white bg-success">
-                        <div class="card-header">Enter Symptoms :</div>
-                        <div class="card-body">
-                            <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
-                            <br>
-                            <div class="text-right"><button id="btn_get_cond_suggest" type="submit"
-                                    class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
-                    </div> -->
+
+                        <!-- <input type="hidden" name="patient_id" value="3" /> -->
+                        <input type="hidden" name="dentist_id" value="{{ Auth::user()->id }}" />
+
                         <span>Enter Symptoms :</span><br><br>
                         <input id="sel_symp" class="tag-ctn" style="width:400px;" type="text" name="sel_symp" />
                         <br>
@@ -312,10 +306,10 @@
                         <div id="presc_suggestion">
                         </div>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
-        <div class="col-4 m-auto">
+        <div class="col-4 m-autoX">
             <div class="card border-info">
                 <div class="card-header font-monospace font-lg">Diagnosis Details</div>
                 <div class="card-body">
@@ -343,6 +337,7 @@
                                 placeholder="Add notes here..." spellcheck="false"></textarea>
                         </div>
                     </div>
+                </form>
 
                 </div>
             </div>
@@ -2063,7 +2058,7 @@
 
                 var str_input_cond = "<br><span>Enter Prescriptions : </span><br><br>" +
                     '<input id="sel_presc" class="tag-ctn" style="width:400px;" type="text" name="sel_presc" /><br>' +
-                    '<div class="text-right"><button type="submit" class="btn btn-info">Save</button></div>';
+                    '<div class="text-right"><button type="submit" class="btn btn-info">Save & Continue</button></div>';
 
                 $("#presc_suggestion").append(str_input_cond);
 

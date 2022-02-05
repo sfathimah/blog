@@ -184,6 +184,7 @@ class DiagnosisController extends Controller
     public function store_diagnosis(Request $request)
     {
         $request->validate([
+            'dentist_id' => 'required',
             'sel_symp' => 'required',
             'sel_cond' => 'required',
             'sel_presc' => 'required'
@@ -195,6 +196,22 @@ class DiagnosisController extends Controller
                         ->with('success','Diagnosis saved successfully.');
     }
 
+
+    public function store_diagnosis_int(Request $request)
+    {
+        $request->validate([
+            'dentist_id' => 'required',
+            'sel_symp' => 'required',
+            'sel_cond' => 'required',
+            'sel_presc' => 'required'
+        ]);
+  
+        $new = Diagnosis::create($request->all());
+        $id = $new->id;
+   
+        return redirect()->route('statement.index', $id)
+                        ->with('success','Diagnosis saved successfully.');
+    }
     /**
      * Display the specified resource.
      *

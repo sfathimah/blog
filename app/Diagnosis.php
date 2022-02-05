@@ -9,6 +9,6 @@ class Diagnosis extends Model
     protected $table="diagnosis";
 
     protected $fillable = [
-        'name','sel_symp','sel_cond','sel_presc'
+        'dentist_id','patient_id','sel_symp','sel_cond','sel_presc','notes'
     ];
 }
