@@ -54,6 +54,15 @@
             </div>
             @endif
         </div>
+       @php
+       $dentistid = $User->id;
+       $dentist = DB::table('users')->where('id',$dentistid)->first();
+       $name = $dentist->name;
+       
+       @endphp
+        <div class="row">
+        <br><big class="text-medium-emphasis ">Update Schedule for: {{$name}}</big><br><br>
+        </div>
 
         <div class="row">
             <div id="calendar"></div>
@@ -100,9 +109,26 @@
             eventStartEditable: false,
             selectHelper: true,
             select: function (start, end, allDay) {
+                var startDate = moment(start),
+                    endDate = moment(end),
+                    date = startDate.clone(),
+                    isWeekend = false;
+
+                while (date.isBefore(endDate)) {
+                    if (date.isoWeekday() == 6 || date.isoWeekday() == 7) {
+                        isWeekend = true;
+                    }
+                    date.add(1, 'day');
+                }
+
+                if (isWeekend) {
+                    alert('Weekends are clinic offday. Please reselect from Monday - Friday');
+
+                    return false;
+                }
                 var txt;
                 if (confirm("Set selected date as working for selected dentist?")) {
-                    
+
                     var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                     var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                     $.ajax({
@@ -141,7 +167,7 @@
             // eventDrop: function (event, delta) {
             //     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
             //     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-                
+
             //     $.ajax({
             //         url: SITEURL + '/schedule/fullcalenderAjax/' + userid,
             //         data: {

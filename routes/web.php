@@ -110,9 +110,13 @@ Route::post('/medicalrecord/destroy/{Patient}', 'MedicalRecordController@destroy
 Route::get('/pages/meeting/index', 'MeetingController@index')->name('pages.meeting.index');
 Route::post('/pages/meeting/search', 'MeetingController@search')->name('pages.meeting.search');
 Route::get('/pages/meeting/cancel/{Bookedmeeting}', 'MeetingController@cancel')->name('pages.meeting.cancel');
+Route::get('/pages/meeting/reject/{Bookedmeeting}', 'MeetingController@reject')->name('pages.meeting.reject');
+Route::get('/pages/meeting/approve/{Bookedmeeting}', 'MeetingController@approve')->name('pages.meeting.approve');
 Route::get('/pages/meeting/view/{id}', 'MeetingController@view')->name('pages.meeting.view');
+Route::get('/pages/meeting/viewupdate/{id}', 'MeetingController@viewupdate')->name('pages.meeting.viewupdate');
 //Route::post('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
 Route::get('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
+Route::get('/pages/meeting/updatestatus', 'MeetingController@updatestatus')->name('pages.meeting.updatestatus');
 Route::post('/pages/meeting/book/{dentistid}/{date}/{slot}/{service}/{symptom}', 'MeetingController@book')->name('pages.meeting.book');
 
 /** for diagnosis - Dentist */

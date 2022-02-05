@@ -3,11 +3,7 @@
         <i class="c-sidebar-nav-icon cil-home"></i>Dashboard
     </a>
 </li>
-<li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('pending') }}">
-        <i class="c-sidebar-nav-icon cil-book"></i>Appointment History
-    </a>
-</li>
+
 <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link xc-active" href="{{ route('diagnosis.index') }}">
         <i class="c-sidebar-nav-icon cil-clipboard"></i>Diagnosis Aid Tool

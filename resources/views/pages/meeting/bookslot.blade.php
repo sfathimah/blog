@@ -58,6 +58,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="text-right">
+                                    <a href="{{ route('pages.meeting.index') }}" class="btn btn-danger mt-4">Reselect a new date</a>
+                                </div>
                     </div>
                 </div>
             </div>

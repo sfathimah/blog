@@ -26,12 +26,11 @@
                             <table class="table table-responsive-sm xtable-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Dentist</th>
-                                        <th class="text-center">Date</th>
+                                    <th class="text-center">Date</th>
                                         <th class="text-center">Time</th>
                                         <th class="text-center">Status</th>
+                                        <th class="text-center">Dentist</th>
                                         <th class="text-center">Action</th>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,11 +81,10 @@
                                     </div>
 
                                     <tr>
-                                        <td class="text-center">{{ $Bookedmeetings->dentistname }}</td>
-                                        <td class="text-center">{{ $Bookedmeetings->date }}</td>
+                                    <td class="text-center">{{ $Bookedmeetings->date }}</td>
                                         <td class="text-center">{{ $Bookedmeetings->slot }}</td>
-                                        <td class="{{$text}} font-weight-bold text-center">{{ $Bookedmeetings->status }}
-                                        </td>
+                                        <td class="{{$text}} font-weight-bold text-center">{{ $Bookedmeetings->status }}</td>
+                                        <td class="text-center">{{ $Bookedmeetings->dentistname }}</td>
 
                                         <td class="text-center">
                                             <div class="xbtn-group" role="group" aria-label="Basic example">
@@ -138,7 +136,7 @@
             var ids = $(this).data('id');
             console.log(window.location.href);
             var route = window.location.origin+"/pages/meeting/cancel/"+ids;
-            var button = '<a class="btn btn-primary" id="understood" href="'+route+'">Understood</a>';
+            var button = '<a class="btn btn-primary" id="understood" href="'+route+'">Confirm</a>';
 
                 $('#understood').html(button);
                 $('#staticBackdropLive').modal('show');
