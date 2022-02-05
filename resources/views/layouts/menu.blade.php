@@ -9,7 +9,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('meeting') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('pages.meeting.index') }}">
         <i class="c-sidebar-nav-icon cil-calendar"></i>Book Appointment
     </a>
 </li>

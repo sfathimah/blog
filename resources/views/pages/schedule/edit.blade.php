@@ -3,8 +3,8 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('pages.workload.appointmentSetting') }}">Manage Services and Task Workload</a></li>
-    <li class="breadcrumb-item active">Edit Services and Task Workload</li>
+    <li class="breadcrumb-item"><a href="{{ route('pages.schedule.index') }}">Manage Dentists' Data and Schedule</a></li>
+    <li class="breadcrumb-item active">Edit Dentists' Data</li>
 
 </ol>
 @endsection
@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="col-6 m-auto">
         <div class="card">
-            <div class="card-header">Update Service and Task Workload
+            <div class="card-header">Update Dentists' Data
             </div>
             <div class="card-body">
 
@@ -28,7 +28,7 @@
                 </div>
                 @endif
             
-                <form action="{{ route('pages.workload.update_serv',$AppointmentSetting->id) }}" method="POST">
+                <form action="{{ route('pages.schedule.update',$User->id) }}" method="POST">
                     @csrf
                     @method('PUT')
             
@@ -36,10 +36,12 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <br>
-                                <strong>Services:</strong>
-                                <input type="text" name="service" value="{{ $AppointmentSetting->service }}" class="form-control" placeholder="Service" required><br>
-                                <strong>Task Workload:</strong>
-                                <input type="text" name="TaskWorkload" value="{{ $AppointmentSetting->TaskWorkload }}" class="form-control" placeholder="TaskWorkload" required><br>
+                                <strong>Name:</strong>
+                                <input type="text" name="name" value="{{ $User->name }}" class="form-control" placeholder="Name" required><br>
+                                <strong>Email:</strong>
+                                <input type="text" name="email" value="{{ $User->email }}" class="form-control" placeholder="Email" required><br>
+                                <strong>IC No:</strong>
+                                <input type="text" name="icno" value="{{ $User->icno }}" class="form-control" placeholder="IC No" required><br>
                                 
                             </div>
                         </div>

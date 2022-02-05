@@ -88,23 +88,32 @@ Route::get('/status/pending', 'PendingController@index')->name('pending');
 
 /**for schedule */
 
-Route::get('/schedule/schedule', 'ScheduleController@index')->name('pages.schedule.schedule');
-Route::get('/schedule/fullcalender', 'FullCalenderController@index')->name('pages.schedule.fullcalender');
-Route::post('/schedule/fullcalenderAjax','FullCalenderController@ajax');
+Route::get('/schedule', 'FullCalenderController@index')->name('pages.schedule.index');
+Route::get('/schedule/{User}/fullcalender', 'FullCalenderController@fullcalender')->name('pages.schedule.fullcalender');
+Route::post('/schedule/fullcalenderAjax/{User}','FullCalenderController@ajax');
+Route::get('/schedule/{User}/edit', 'FullCalenderController@edit')->name('pages.schedule.edit');
+Route::put('/schedule/{User}/update', 'FullCalenderController@update')->name('pages.schedule.update');
+Route::post('/schedule/destroy/{User}', 'FullCalenderController@destroy')->name('pages.schedule.destroy'); 
+Route::get('/schedule/create', 'FullCalenderController@create')->name('pages.schedule.create');
+Route::post('/schedule/store', 'FullCalenderController@store')->name('pages.schedule.store'); 
 
 /**for medical records */
 Route::get('/record', 'RecordController@index')->name('records');
-
 Route::get('/pages/medicalrecord/index', 'MedicalRecordController@index')->name('pages.medicalrecord.index');
 // Route::resource('/pages/medicalrecord/index','MedicalRecordController');
 Route::get('/medicalrecord/{id}/edit/','MedicalRecordController@edit');
-
 Route::post('/medicalrecord/store', 'MedicalRecordController@store')->name('pages.medicalrecord.store'); 
 Route::post('/medicalrecord/destroy/{Patient}', 'MedicalRecordController@destroy')->name('pages.medicalrecord.destroy');
 
 /**for booking meeting */
 
-Route::get('/meeting', 'MeetingController@index')->name('meeting');
+Route::get('/pages/meeting/index', 'MeetingController@index')->name('pages.meeting.index');
+Route::post('/pages/meeting/search', 'MeetingController@search')->name('pages.meeting.search');
+Route::get('/pages/meeting/cancel/{Bookedmeeting}', 'MeetingController@cancel')->name('pages.meeting.cancel');
+Route::get('/pages/meeting/view/{id}', 'MeetingController@view')->name('pages.meeting.view');
+//Route::post('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
+Route::get('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
+Route::post('/pages/meeting/book/{dentistid}/{date}/{slot}/{service}/{symptom}', 'MeetingController@book')->name('pages.meeting.book');
 
 /** for diagnosis - Dentist */
 Route::get('/dentist/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');

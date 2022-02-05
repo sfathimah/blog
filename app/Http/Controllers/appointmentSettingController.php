@@ -25,7 +25,7 @@ class appointmentSettingController extends Controller
      */
     public function index()
     {
-        $AppointmentSetting = Appointmentsetting::latest()->paginate(5);
+        $AppointmentSetting = Appointmentsetting::latest()->paginate(200);
         $Threshold = Threshold::all();
        
         return view('pages.workload.appointmentSetting',compact('AppointmentSetting', 'Threshold'))
@@ -59,12 +59,12 @@ class appointmentSettingController extends Controller
         $request->validate([
             
             'service' => 'required',
-            'TFactor' => 'required',
+            'TaskWorkload' => 'required|numeric',
         ]);
 
         Appointmentsetting::create([ 
             'service' => $request->service,
-            'TFactor' => $request->TFactor
+            'TaskWorkload' => $request->TaskWorkload
         ]);
   
         return view('pages.workload.appointmentSetting')->with('successMsg','Details has been updated.');
@@ -74,7 +74,7 @@ class appointmentSettingController extends Controller
     {
         $request->validate([
             'service' => 'required',
-            'TFactor' => 'required',
+            'TaskWorkload' => 'required|numeric',
         
         ]);
   
@@ -92,17 +92,7 @@ class appointmentSettingController extends Controller
                         ->with('success','Selected service deleted successfully');
     }
 
-    public function update_serv(Request $request, Appointmentsetting $AppointmentSetting)
-    {
-        $request->validate([
-            'service' => 'required',
-            'TFactor' => 'required',
-        ]);
-
-        $AppointmentSetting->update($request->all());
-        return redirect()->route('pages.workload.appointmentSetting')
-                        ->with('success','Service updated successfully');
-    }
+  
     public function edit_serv(Appointmentsetting $AppointmentSetting)
     {
         return view('pages.workload.edit_serv',compact('AppointmentSetting'));
@@ -111,7 +101,7 @@ class appointmentSettingController extends Controller
     public function update_thres(Request $request, Threshold $Threshold)
     {
         $request->validate([
-            'threshold' => 'required'
+            'threshold' => 'required|numeric'
         ]);
   
         $Threshold->update($request->all());
@@ -124,11 +114,23 @@ class appointmentSettingController extends Controller
     {
         $request->validate([
             'service' => 'required',
-            'TFactor' => 'required',
+            'TaskWorkload' => 'required|numeric',
         ]);
 
         $AppointmentSetting->update($request->all());
         dd($AppointmentSetting);
+        return redirect()->route('pages.workload.appointmentSetting')
+                        ->with('success','Service updated successfully');
+    }
+
+    public function update_serv(Request $request, Appointmentsetting $AppointmentSetting)
+    {
+        $request->validate([
+            'service' => 'required',
+            'TaskWorkload' => 'required|numeric',
+        ]);
+
+        $AppointmentSetting->update($request->all());
         return redirect()->route('pages.workload.appointmentSetting')
                         ->with('success','Service updated successfully');
     }

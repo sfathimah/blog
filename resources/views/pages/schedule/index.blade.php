@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item active">Manage Services and Task Workload</li>
+    <li class="breadcrumb-item active">Manage Dentists' Data and Schedule</li>
 
 </ol>
 @endsection
@@ -53,36 +53,11 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="service" role="tabpanel">
                         
-                            <div>
-                                <br>
-                                <table>
-                                    <tr >
-                                        <td>Workload Threshold:   </td> 
-                                        @foreach ($Threshold as $Threshold)
-                                        <form action="{{ route('pages.workload.update_thres', $Threshold->id) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <td><input type="text" name="threshold" value="{{ $Threshold->threshold }}" class="form-control ml-2" placeholder="Threshold"></td>
-                                        @endforeach
-                                        <td>
-                                            
-                                                <div class="xbtn-group" role="group" aria-label="Basic example">
-                                                    
-                                                <button type="submit" class="btn btn-success btn-lg ml-3">Submit</button></div>
-                                            
-                                        </td>
-                                        </form>
-                                    </tr>
-                                    
-                                </table>
-                                
-                                <hr>
-                            </div>
                             <div class="row mb-2"> 
                                 <div class="col-2 ml-auto">
                                     <a class="btn xbtn-block btn-lg btn-pill btn-success float-right font-weight-bolder cil-plus" type="button" 
-                                        title="Add New Service"
-                                        href="{{ route('pages.workload.create_serv') }}"></a>
+                                        title="Add New Dentist"
+                                        href="{{ route('pages.schedule.create') }}"></a>
                                     </div>
 
                             </div>
@@ -90,34 +65,23 @@
                             <table class="table table-responsive-sm xtable-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Service</th>
-                                        <th class="text-center">Task Workload</th>
+                                        <th class="text-center">Name</th>
                                         <th style="width:30%" class="text-center">Action</th>                                                                                                                                                                                                                                                                                                                                                           </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($AppointmentSetting as $AppointmentSetting)
+                                    @foreach ($User as $User)
                                     <tr>
-                                    <td class="text-center">{{ $AppointmentSetting->service }}</td>
-                                        <td class="text-center">{{ $AppointmentSetting->TaskWorkload }}</td>
+                                    <td class="text-center">{{ $User->name }}</td>
                                     
                                         <td class="text-center">
-                                            <!-- <form action="{{ route('pages.workload.update_newserv',$AppointmentSetting->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-success btn-lg cil-check-alt"></button>
-                                            </form> -->
-                                            <form action="{{ route('pages.workload.destroy_serv',$AppointmentSetting->id) }}" method="POST">
+                                           
+                                            <form action="{{ route('pages.schedule.destroy',$User->id) }}" method="POST">
                                                 <div class="xbtn-group" role="group" aria-label="Basic example">
                                                     <a class="btn btn-info btn-lg cil-pencil"
-                                                        href="{{ route('pages.workload.edit_serv',$AppointmentSetting->id) }}"></a>
-                                                        <!-- save on same page -->
-                                                        <!-- <a class="btn btn-success btn-lg cil-check-alt"
-                                                        href="{{ route('pages.workload.update_serv',$AppointmentSetting->id) }}"></a> -->
-                                                        
-                                                        <!-- disable the service
-                                                        <a class="btn btn-warning btn-lg cil-low-vision hidden"
-                                                        href="{{ route('pages.workload.edit_serv',$AppointmentSetting->id) }}"></a> -->
+                                                        href="{{ route('pages.schedule.edit',$User->id) }}"></a>
+                                                    <a class="btn btn-primary btn-lg cil-calendar"
+                                                        href="{{ route('pages.schedule.fullcalender',$User->id) }}"></a>
                                                     @csrf
                                                     @method('POST')
 

@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th>Service</th>
-                            <th class="text-center">TFactor</th>
+                            <th class="text-center">TaskWorkload</th>
                             <th class="text-center">Duration</th>
                             <th class="text-center">Action</th>                                                                                                                                                                                                                                                                                                                                                           </th>
                         </tr>
@@ -39,7 +39,7 @@
                         <tr>
                             <td><input type="text" name="service" value="{{ $AppointmentSetting->service }}" class="form-control" placeholder="Service"></td>
                             <td class="text-center">
-                            <input type="text" name="TFactor" value="{{ $AppointmentSetting->TFactor }}" class="form-control" placeholder="TFactor">
+                            <input type="text" name="TaskWorkload" value="{{ $AppointmentSetting->TaskWorkload }}" class="form-control" placeholder="TaskWorkload">
                                
                             </td>
                             <td class="text-center"> 
