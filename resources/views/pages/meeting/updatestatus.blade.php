@@ -51,6 +51,10 @@
                                     $bg='bg-warning';
                                     $text='text-warning';
                                     }
+                                    else if($i=='Completed'){
+                                    $bg='bg-success';
+                                    $text='text-success';
+                                    }
                                     else{
                                     $bg='bg-danger';
                                     $text='text-danger';
@@ -131,7 +135,7 @@
                                                 <a class="btn btn-info"
                                                     href="{{ route('pages.meeting.viewupdate',$Bookedmeetings->id) }}">View</a>
                                                 @php
-                                                if($Bookedmeetings->status == "Approved" || $Bookedmeetings->status == "Rejected")
+                                                if($Bookedmeetings->status != "Pending")
                                                 {
                                                 $class1 = 'invisible ';
                                                 $class = 'invisible ';

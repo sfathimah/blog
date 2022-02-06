@@ -78,7 +78,7 @@
                                             {$ans = "Yes"; $color="text-danger";}
                                             else{$ans="No";$color="text-success";}
                                             @endphp
-                                            <th>Allergies?/th>
+                                            <th>Allergies</th>
                                             <td class="{{$color}} font-weight-bold">{{$ans}}</td>
                                             <td>{{$alNotes}}</td>
                                         </tr>

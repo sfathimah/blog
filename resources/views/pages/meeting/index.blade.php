@@ -359,15 +359,15 @@ $resultSet = $mysqli-> query("Select service FROM appointmentsettings ORDER BY T
             @endsection
             @push('page_scripts')
             <script>
-                const picker = document.getElementById('date');
-                picker.addEventListener('input', function(e){
-                var day = new Date(this.value).getUTCDay();
-                if([6,0].includes(day)){
-                    e.preventDefault();
-                    this.value = '';
-                    alert('Weekends are clinic offday. Please reselect from Monday - Friday');
-                }
-                });
+                // const picker = document.getElementById('date');
+                // picker.addEventListener('input', function(e){
+                // var day = new Date(this.value).getUTCDay();
+                // if([6,0].includes(day)){
+                //     e.preventDefault();
+                //     this.value = '';
+                //     alert('Weekends are clinic offday. Please reselect from Monday - Friday');
+                // }
+                // });
                 /**
                  * All auto suggestion boxes are fucked up or badly written.
                  * This is an attempt to create something that doesn't suck...
