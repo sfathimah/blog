@@ -3,7 +3,6 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('pages.viewprofile') }}">User Profile</a></li>
     <li class="breadcrumb-item active">View Patient Medical Records </li>
 
 </ol>
@@ -13,6 +12,7 @@
     <div class="col-10 m-auto">
         <div class="card">
             <div class="card-header">
+                Patient's Record
             </div>
             <div class="card-body">
                 @if(!empty($successMsg))
@@ -94,9 +94,6 @@
                                             <td>{{$otNotes}}</td>
                                         </tr>
                                     </table>
-                                </div>
-                                <div class="text-right">
-                                    <a  href="{{ route('diagnosis.index') }}" class="btn btn-success mt-4">Back</a>
                                 </div>
 
                             </div>

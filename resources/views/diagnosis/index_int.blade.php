@@ -320,9 +320,12 @@
                     </div>
                     <div class="mb-2 row">
                         <label class="col-sm-5 col-form-label font-weight-bold" for="name">Patient Name :</label>
-                        <div class="col-sm-7">
+                        <div class="col-sm-5">
                             <input class="form-control-plaintext" type="text" name="patient_id" value="{{ $patient->id }}" hidden>
                             <input class="form-control-plaintext" type="text" value="{{ $patient->name }}">
+                        </div>
+                        <div class="col-sm-2 text-right">
+                            <a id="btnview" target="_blank" class="btn btn-info cil-notes" href="{{ route('diagnosis.viewrecords', $patient->id) }}"></a>
                         </div>
                     </div>
                     <div class="mb-2 row">

@@ -325,15 +325,15 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <select class="form-select" name="patient_id" aria-label="Default select example" required>
-                                            <option value="" selected>Select Patient</option>
+                                        <select id="selpatients" onchange="myFunction()" class="form-select" name="patient_id" aria-label="Default select example" required>
+                                            <option>Select Patient</option>
                                             @foreach ($patients as $patient)
                                             <option value="{{ $patient->id }}">{{ $patient->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
                                     <td>
-                                    <a class="btn btn-success" href="{{ route('diagnosis.viewrecords', $patient->id) }}">View Medical Records</a>
+                                        <a id="btnview" target="_blank" class="btn btn-info cil-notes" href=""></a>
                                     </td>
                                 </tr>
                             </table>
@@ -358,9 +358,14 @@
 
 @push('page_scripts')
 <script>
-    document.getElementById('datePicker').valueAsDate = new Date();
+    
+    function myFunction() {
+        var e = document.getElementById("selpatients");
+        var selpatientid = e.value;
+        var str = "/diagnosis/viewrecords/" + selpatientid;
 
-
+        document.getElementById('btnview').setAttribute("href", str);
+    }
     /**
      * All auto suggestion boxes are fucked up or badly written.
      * This is an attempt to create something that doesn't suck...
@@ -373,6 +378,9 @@
      * Licence: TagSuggest is licenced under MIT licence (https://www.opensource.org/licenses/mit-license.php)
      */
     $(document).ready(function () {
+
+        document.getElementById('datePicker').valueAsDate = new Date();
+
         "use strict";
         var TagSuggest = function (element, options) {
             var ms = this;
