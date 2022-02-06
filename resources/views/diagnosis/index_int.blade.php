@@ -288,7 +288,7 @@
         <div class="col-8 m-autox">
             <div class="card card-accent-success">
                 <div class="card-header font-monospace font-lg">Diagnosis Aid Form</div>
-                <form action="{{ route('diagnosis.store_diagnosis') }}" method="POST">
+                <form action="{{ route('diagnosis.store_diagnosis_int', [$patient->id, $meetingid]) }}" method="POST">
                     @csrf
                     <div class="card-body">
 
@@ -306,7 +306,6 @@
                         <div id="presc_suggestion">
                         </div>
                     </div>
-                <!-- </form> -->
             </div>
         </div>
         <div class="col-4 m-autoX">
@@ -319,15 +318,11 @@
                             <input class="form-control-plaintext" id="datePicker" type="date" name="date" readonly>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2x col-form-label font-weight-bold" for="name">Patient Name :</label>
-                        <div class="col-sm-7x">
-                            <select class="form-select" name="patient_id" aria-label="Default select example" required>
-                                <option value="" selected>Select Patient</option>
-                                @foreach ($patients as $patient)
-                                <option value="{{ $patient->id }}">{{ $patient->name }}</option>
-                                @endforeach
-                            </select>
+                    <div class="mb-2 row">
+                        <label class="col-sm-5 col-form-label font-weight-bold" for="name">Patient Name :</label>
+                        <div class="col-sm-7">
+                            <input class="form-control-plaintext" type="text" name="patient_id" value="{{ $patient->id }}" hidden>
+                            <input class="form-control-plaintext" type="text" value="{{ $patient->name }}">
                         </div>
                     </div>
                     <div class="mb-2 row">
@@ -1953,7 +1948,7 @@
 
     function get_cond_suggest(sel_symp) {
         $.ajax({
-            url: 'get_cond_suggest/' + sel_symp,
+            url: '/dentist/get_cond_suggest/' + sel_symp,
             data: ({
                 sel_symp: sel_symp
             }),
@@ -2013,7 +2008,7 @@
 
     function get_presc_suggest(sel_cond) {
         $.ajax({
-            url: 'get_presc_suggest/' + sel_cond,
+            url: '/dentist/get_presc_suggest/' + sel_cond,
             data: ({
                 sel_cond: sel_cond
             }),
@@ -2058,7 +2053,7 @@
 
                 var str_input_cond = "<br><span>Enter Prescriptions : </span><br><br>" +
                     '<input id="sel_presc" class="tag-ctn" style="width:400px;" type="text" name="sel_presc" /><br>' +
-                    '<div class="text-right"><button type="submit" class="btn btn-info">Save</button></div>';
+                    '<div class="text-right"><button type="submit" class="btn btn-info">Save & Continue</button></div>';
 
                 $("#presc_suggestion").append(str_input_cond);
 

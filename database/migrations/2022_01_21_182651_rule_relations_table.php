@@ -17,6 +17,7 @@ class RuleRelationsTable extends Migration
             $table->id();
             $table->integer('symp_id');
             $table->integer('cond_id');
+            $table->float('cf_value');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 

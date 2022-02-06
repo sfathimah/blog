@@ -11,6 +11,7 @@ use App\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Bookedmeeting;
 
 class DiagnosisController extends Controller
 {
@@ -26,6 +27,15 @@ class DiagnosisController extends Controller
         ->get();
 
         return view('diagnosis.index', compact('patients'));
+    }
+
+    public function index_int($meetingid, $patientid)
+    {
+        $patient = User::select('id', 'name')
+        ->whereId($patientid)
+        ->first();
+
+        return view('diagnosis.index_int', compact('patient','meetingid','patientid'));
     }
 
     public function sympList_json()
@@ -184,59 +194,46 @@ class DiagnosisController extends Controller
     public function store_diagnosis(Request $request)
     {
         $request->validate([
+            'dentist_id' => 'required',
             'sel_symp' => 'required',
             'sel_cond' => 'required',
             'sel_presc' => 'required'
         ]);
-  
+
         Diagnosis::create($request->all());
    
         return redirect()->route('diagnosis.index')
                         ->with('success','Diagnosis saved successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function store_diagnosis_int(Request $request, $patientid, $meetingid)
     {
-        //
+        $request->validate([
+            'dentist_id' => 'required',
+            'sel_symp' => 'required',
+            'sel_cond' => 'required',
+            'sel_presc' => 'required'
+        ]);
+
+        $new = Diagnosis::create($request->all());
+        $id = $new->id;
+
+        Bookedmeeting::where('id', $meetingid)->update(['diagnosis_id' => $id]);
+   
+        return redirect()->route('statement.index_int', [$meetingid, $patientid]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    function debug_to_console($data, $context = 'Debug in Console') {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        // Buffering to solve problems frameworks, like header() in this and not a solid return.
+        ob_start();
+    
+        $output  = 'console.info(\'' . $context . ':\');';
+        $output .= 'console.log(' . json_encode($data) . ');';
+        $output  = sprintf('<script>%s</script>', $output);
+    
+        echo $output;
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

@@ -10,7 +10,7 @@
     </a>
 </li>
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link xc-active" href="{{ route('statement.index') }}">
+    <a class="c-sidebar-nav-link xc-active" href="{{ route('statement.index', 1) }}">
         <i class="c-sidebar-nav-icon cil-playlist-add"></i>Generate Prescription <br>Statement
     </a>
 </li>

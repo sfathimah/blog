@@ -286,7 +286,7 @@
 
 @section('content')
 <?php
-$mysqli = NEW MySQLi('localhost','root','','dentalsystem');
+$mysqli = NEW MySQLi('localhost','root','','crud7');
 $resultSet = $mysqli-> query("Select service FROM appointmentsettings ORDER BY TaskWorkload ASC");
 
 ?>

@@ -131,34 +131,39 @@
                                                 <a class="btn btn-info"
                                                     href="{{ route('pages.meeting.viewupdate',$Bookedmeetings->id) }}">View</a>
                                                 @php
-                                                if($Bookedmeetings->status == "Approved" || $Bookedmeetings->status == "Rejected")
+                                                if($Bookedmeetings->status != "Pending")
                                                 {
-                                                $class1 = 'invisible ';
-                                                $class = 'invisible ';
+                                                    $reject = 'hidden ';
+                                                    $approve = 'hidden ';
+
+                                                    if($Bookedmeetings->status == "Approved"){
+                                                        $start = '';
+                                                    }
+                                                    else{
+                                                        $start = 'hidden';
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                $class = 'visible';
-                                                $class1 = 'visible';
+                                                    $start = 'hidden';
+                                                    $approve = '';
+                                                    $reject = '';
                                                 }
                                                 @endphp
                                                 
-                                                <a class="btn btn-success {{$class}}"
-                                                    href="{{ route('pages.meeting.approve',$Bookedmeetings->id) }}">Approve</a>
-                                                <!-- <button type="button" data-coreui-toggle="modal"
-                                                    data-coreui-target="#staticBackdropLive2" id="cancelBtn"
-                                                    class="btn btn-success approve {{$class}}"
-                                                    data-id="{{$Bookedmeetings->id}}">Approve</button> -->
+                                                <a class="btn btn-success"
+                                                    href="{{ route('pages.meeting.approve',$Bookedmeetings->id) }}" {{$approve}}>Approve</a>
                                                 @csrf
                                                 @method('POST')
 
                                                
                                                 <button type="button" data-coreui-toggle="modal"
                                                     data-coreui-target="#staticBackdropLive" id="cancelBtn"
-                                                    class="btn btn-danger reject {{$class1}}"
-                                                    data-id="{{$Bookedmeetings->id}}">Reject</button>
+                                                    class="btn btn-danger reject"
+                                                    data-id="{{$Bookedmeetings->id}}" {{$reject}}>Reject</button>
 
-
+                                                <a class="btn btn-success cil-media-play "
+                                                    href="{{ route('diagnosis.index_int',[$Bookedmeetings->id ,$Bookedmeetings->patientid]) }}" {{$start}}>  Meeting</a>
 
                                         </td>
                                     </tr>
