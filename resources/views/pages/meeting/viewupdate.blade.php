@@ -82,7 +82,7 @@
                                     </table>
                                     </div>
 
-                                    @if ($status == "Completed")
+                                    @if ($i == "Completed")
 
                                         @php
                                         $diagnosisid = $Bookedmeetingid->diagnosis_id;

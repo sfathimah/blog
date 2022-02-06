@@ -322,12 +322,22 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2x col-form-label font-weight-bold" for="name">Patient Name :</label>
                         <div class="col-sm-7x">
-                            <select class="form-select" name="patient_id" aria-label="Default select example" required>
-                                <option value="" selected>Select Patient</option>
-                                @foreach ($patients as $patient)
-                                <option value="{{ $patient->id }}">{{ $patient->name }}</option>
-                                @endforeach
-                            </select>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <select class="form-select" name="patient_id" aria-label="Default select example" required>
+                                            <option value="" selected>Select Patient</option>
+                                            @foreach ($patients as $patient)
+                                            <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                    <a class="btn btn-success" href="{{ route('diagnosis.viewrecords', $patient->id) }}">View Medical Records</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
                         </div>
                     </div>
                     <div class="mb-2 row">

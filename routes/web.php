@@ -134,6 +134,7 @@ Route::get('/dentist/get_presc_suggest/{sel_cond}','DiagnosisController@presc_su
 Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
 Route::post('/dentist/diagnosis/store_diagnosis_int/{patientid}/{meetingid}', 'DiagnosisController@store_diagnosis_int')->name('diagnosis.store_diagnosis_int'); 
+Route::get('/diagnosis/viewrecords/{id}', 'DiagnosisController@viewrecords')->name('diagnosis.viewrecords');
 
 /** for statement - Dentist */
 Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');

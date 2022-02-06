@@ -11,6 +11,7 @@ use App\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Record;
 use App\Bookedmeeting;
 
 class DiagnosisController extends Controller
@@ -234,6 +235,15 @@ class DiagnosisController extends Controller
         $output  = sprintf('<script>%s</script>', $output);
     
         echo $output;
+    }
+    
+    public function viewrecords($id)
+    {
+        //$patientid = Auth::id();
+        $records = Record::where('patientID',$id)->first();   
+
+        //list($role_list) = $this->PCS();
+        return view('diagnosis.viewrecords', compact('records'));
     }
     
 }
