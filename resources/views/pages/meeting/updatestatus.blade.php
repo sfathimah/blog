@@ -145,6 +145,7 @@
                                                 }
                                                 else
                                                 {
+                                                    $start = 'hidden';
                                                     $approve = '';
                                                     $reject = '';
                                                 }

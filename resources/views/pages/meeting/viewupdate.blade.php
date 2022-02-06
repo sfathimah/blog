@@ -72,22 +72,21 @@
                                     </table>
                                     </div>
 
-                                    @php
-
-                                    $diagnosisid = $Bookedmeetingid->diagnosis_id;
-                                    $statementid = $Bookedmeetingid->statement_id;
-
-                                    $diagnosis = DB::table('diagnosis')->where('id',$diagnosisid)->first();
-                                    $statements = DB::table('statement_datas')->where('statement_id',$statementid)->get();
-
-                                    $symp = DB::table('symptoms')->where('id',$diagnosis->sel_symp)->first();
-                                    $cond = DB::table('conditions')->where('id',$diagnosis->sel_cond)->first();
-                                    $presc = DB::table('prescriptions')->where('id',$diagnosis->sel_presc)->first();
-
-                                    $status = $Bookedmeetingid-> status;
-                                    @endphp
-
                                     @if ($status == "Completed")
+
+                                        @php
+                                        $diagnosisid = $Bookedmeetingid->diagnosis_id;
+                                        $statementid = $Bookedmeetingid->statement_id;
+
+                                        $diagnosis = DB::table('diagnosis')->where('id',$diagnosisid)->first();
+                                        $statements = DB::table('statement_datas')->where('statement_id',$statementid)->get();
+
+                                        $symp = DB::table('symptoms')->where('id',$diagnosis->sel_symp)->first();
+                                        $cond = DB::table('conditions')->where('id',$diagnosis->sel_cond)->first();
+                                        $presc = DB::table('prescriptions')->where('id',$diagnosis->sel_presc)->first();
+
+                                        $status = $Bookedmeetingid-> status;
+                                        @endphp
                                         <div class="mt-4">
                                             <span class="h3">Diagnosis Details</span> 
                                         </div>
@@ -96,15 +95,63 @@
 
                                             <tr>
                                                 <th>Selected Symptoms</th>
-                                                <td>{{$diagnosis->sel_symp}}</td>
+                                                <td>
+                                                @php
+                                                $sel_symp = $diagnosis->sel_symp;
+                                                $sel_symps = explode(',', $sel_symp);
+
+                                                $d = [];
+                                                @endphp
+
+                                                @foreach ($sel_symps as $sel_symp)
+                                                    @php
+                                                    $symp = DB::table('symptoms')->where('id',$sel_symp)->first();
+                                                    @endphp
+
+                                                    {{$symp->name}}<br>
+                                                @endforeach
+
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Selected Medical Conditions</th>
-                                                <td>{{$diagnosis->sel_cond}}</td>
+                                                <td>
+                                                    @php
+                                                    $sel_cond = $diagnosis->sel_cond;
+                                                    $sel_conds = explode(',', $sel_cond);
+
+                                                    $d = [];
+                                                    @endphp
+
+                                                    @foreach ($sel_conds as $sel_cond)
+                                                        @php
+                                                        $cond = DB::table('conditions')->where('id',$sel_cond)->first();
+                                                        @endphp
+
+                                                        {{$cond->name}}<br>
+                                                    @endforeach
+                                            
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Selected Prescriptions</th>
-                                                <td>{{$diagnosis->sel_presc}}</td>
+                                                <td>
+                                                    @php
+                                                    $sel_presc = $diagnosis->sel_presc;
+                                                    $sel_prescs = explode(',', $sel_presc);
+
+                                                    $d = [];
+                                                    @endphp
+
+                                                    @foreach ($sel_prescs as $sel_presc)
+                                                        @php
+                                                        $presc = DB::table('prescriptions')->where('id',$sel_presc)->first();
+                                                        @endphp
+
+                                                        {{$presc->name}}<br>
+                                                    @endforeach
+                                            
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Notes</th>
