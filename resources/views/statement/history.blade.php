@@ -36,8 +36,7 @@
                                 <th scope="row">{{ $loop->index + 1 }}</th>
                                 <td>{{ $statement->date }}</td>
                                 <td>{{ $statement->dentist_name }}</td>
-                                <td><a class="viewData btn btn-info btn-lg cil-notes" href=""
-                                        data-id="{{ $statement->id }}"></a>
+                                <td><a class="viewData btn btn-info btn-lg cil-notes" href="" data-id="{{ $statement->id}}"></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -57,7 +56,7 @@
                     <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="insertdata"></div>
+                    <div id="insertdata" style="color: white;"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
@@ -69,6 +68,7 @@
 @endsection
 
 @push('page_scripts')
+
 <script>
     $(document).ready(function () {
 
@@ -78,10 +78,10 @@
             var id = $(this).data('id');
             $.get('view/' + id, function (data) {
 
-                var rows;
+                var rows="";
                 for (let i = 0; i < data.data.length; i++) {
                     rows += '<tr><th scope="row">' + [i + 1] + '</th>' +
-                        '<td>' + data.data[i].presc_id + '</td>' +
+                        '<td>' + data.data[i].presc_name + '</td>' +
                         '<td>' + data.data[i].qty + '</td>' +
                         '<td>' + data.data[i].remark + '</td>' +
                         '</tr>';

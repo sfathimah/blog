@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Dashboardd</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -28,7 +28,7 @@
                            ?>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-danger px-3 mb-3">
-                                        <big class="text-medium-emphasis">Next Appointment</big>
+                                        <big class="text-medium-emphasis mr-3">Next Appointment</big>
                                         <span class="fs-5 fw-semibold">
                                             <?php
                                             if($next_app == null){ echo "-";
@@ -39,13 +39,13 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-info px-3 mb-3">
-                                        <big class="text-medium-emphasis">Pending Appointment</big>
+                                        <big class="text-medium-emphasis mr-3">Pending Appointment</big>
                                         <span class="fs-5 fw-semibold">{{$pending_app}}</span>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-success px-3 mb-3">
-                                        <big class="text-medium-emphasis">Total Appointment</big>
+                                        <big class="text-medium-emphasis mr-3">Total Appointment</big>
                                         <span class="fs-5 fw-semibold">{{$total_app}}</span>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
             <div class="card mb-4">
                 <div class="card-header">Pending Appointments</div>
                 <div class="card-body">
-                    <div class="col text-right">
+                    <div class="col text-right mb-3">
                         <a href="{{ route('pages.meeting.updatestatus') }}" class="btn btn-sm btn-primary">See
                             all Appointments</a>
                     </div>
@@ -127,7 +127,7 @@
             <div class="card mb-4">
                 <div class="card-header">My Past Appointments</div>
                 <div class="card-body">
-                    <div class="col text-right">
+                    <div class="col text-right mb-3">
                         <a href="{{ route('pages.meeting.updatestatus') }}" class="btn btn-sm btn-primary">See
                             all Appointments</a>
                     </div>

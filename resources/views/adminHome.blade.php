@@ -31,20 +31,20 @@
                            ?>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-danger px-3 mb-3">
-                                        <big class="text-medium-emphasis">Next Schedule Update</big>
+                                        <big class="text-medium-emphasis mr-3">Next Schedule Update</big>
                                         <span class="fs-5 fw-semibold">{{$firstDayNextMonth}}</span>
                                     </div>
 
                                 </div>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-info px-3 mb-3">
-                                        <big class="text-medium-emphasis">Total Dentist</big>
+                                        <big class="text-medium-emphasis mr-3">Total Dentist</big>
                                         <span class="fs-5 fw-semibold">{{$total_dentist}}</span>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-start border-start-4 border-start-success px-3 mb-3">
-                                        <big class="text-medium-emphasis">Maximum Daily Workload</big>
+                                        <big class="text-medium-emphasis mr-3">Maximum Daily Workload</big>
                                         <span class="fs-5 fw-semibold">{{$max}}</span>
                                     </div>
                                 </div>

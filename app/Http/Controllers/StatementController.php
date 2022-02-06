@@ -22,6 +22,9 @@ class StatementController extends Controller
         $prescs = Prescription::select('id', 'name')
         ->get();
 
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        // echo date_default_timezone_get();
+
         return view('statement.index', compact('patients','prescs'));
     }
 
@@ -143,10 +146,15 @@ class StatementController extends Controller
 
     public function view_data_modal($id)
     {
-// $this->debug_to_console("masuk");
-    	$sdata = Statement_data::select('presc_id', 'qty', 'remark')
-        ->where('statement_id',$id)
-        ->get();
+    	// $sdata = Statement_data::select('presc_id', 'qty', 'remark')
+        // ->where('statement_id',$id)
+        // ->get();
+
+        $sdata = DB::table('statement_datas')
+            ->where('statement_id',$id)
+            ->join('prescriptions', 'statement_datas.presc_id', '=', 'prescriptions.id')
+            ->select('statement_datas.*', 'prescriptions.name as presc_name')
+            ->get();
 
 	    return response()->json([
 	      'data' => $sdata
