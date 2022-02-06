@@ -11,6 +11,7 @@ use App\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Bookedmeeting;
 
 class DiagnosisController extends Controller
 {
@@ -26,6 +27,15 @@ class DiagnosisController extends Controller
         ->get();
 
         return view('diagnosis.index', compact('patients'));
+    }
+
+    public function index_int($meetingid, $patientid)
+    {
+        $patient = User::select('id', 'name')
+        ->whereId($patientid)
+        ->first();
+
+        return view('diagnosis.index_int', compact('patient','meetingid','patientid'));
     }
 
     public function sympList_json()
@@ -197,7 +207,7 @@ class DiagnosisController extends Controller
     }
 
 
-    public function store_diagnosis_int(Request $request)
+    public function store_diagnosis_int(Request $request, $patientid, $meetingid)
     {
         $request->validate([
             'dentist_id' => 'required',
@@ -208,9 +218,10 @@ class DiagnosisController extends Controller
   
         $new = Diagnosis::create($request->all());
         $id = $new->id;
+
+        Bookedmeeting::where('id', $meetingid)->update(['diagnosis_id' => $id]);
    
-        return redirect()->route('statement.index', $id)
-                        ->with('success','Diagnosis saved successfully.');
+        return redirect()->route('statement.index_int', [$patientid, $meetingid]);
     }
     /**
      * Display the specified resource.

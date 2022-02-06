@@ -70,7 +70,74 @@
                                             <td class="font-weight-bold" style="color:{{$color}};">{{$Bookedmeetingid->status}}</td>
                                         </tr>
                                     </table>
-                                </div>
+                                    </div>
+
+                                    @php
+
+                                    $diagnosisid = $Bookedmeetingid->diagnosis_id;
+                                    $statementid = $Bookedmeetingid->statement_id;
+
+                                    $diagnosis = DB::table('diagnosis')->where('id',$diagnosisid)->first();
+                                    $statements = DB::table('statement_datas')->where('statement_id',$statementid)->get();
+
+                                    $symp = DB::table('symptoms')->where('id',$diagnosis->sel_symp)->first();
+                                    $cond = DB::table('conditions')->where('id',$diagnosis->sel_cond)->first();
+                                    $presc = DB::table('prescriptions')->where('id',$diagnosis->sel_presc)->first();
+
+                                    $status = $Bookedmeetingid-> status;
+                                    @endphp
+
+                                    @if ($status == "Completed")
+                                        <div class="mt-4">
+                                            <span class="h3">Diagnosis Details</span> 
+                                        </div>
+                                        
+                                        <table class="table table-bordered align-items-center table-flush my-1">
+
+                                            <tr>
+                                                <th>Selected Symptoms</th>
+                                                <td>{{$diagnosis->sel_symp}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Selected Medical Conditions</th>
+                                                <td>{{$diagnosis->sel_cond}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Selected Prescriptions</th>
+                                                <td>{{$diagnosis->sel_presc}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Notes</th>
+                                                <td>{{$diagnosis->notes}}</td>
+                                            </tr>
+                                        </table>
+
+                                        <div class="mt-5">
+                                            <span class="h3">Prescription Statement</span> 
+                                        </div>
+                                        <table class="table table-bordered align-items-center table-flush my-2">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Prescription</th>
+                                                <th>Qty</th>
+                                                <th>Remark</th>
+                                            </tr>
+
+                                            @foreach ($statements as $statement)
+                                            @php
+                                            $presc = DB::table("prescriptions")->where("id",$statement->presc_id)->first();
+                                            @endphp
+                                            <tr>
+                                                <td>{{$loop->index+1}}</td>
+                                                <td>{{$presc->name}}</td>
+                                                <td>{{$statement->qty}}</td>
+                                                <td>{{$statement->remark}}</td>
+                                            </tr>
+                                            @endforeach
+                                            
+
+                                        </table>
+                                    @endif
                                 <div class="text-right">
                                     <a href="{{ route('pages.meeting.updatestatus') }}" class="btn btn-success mt-4">Back</a>
                                 </div>

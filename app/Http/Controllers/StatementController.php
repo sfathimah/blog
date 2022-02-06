@@ -8,6 +8,7 @@ use App\Statement;
 use App\User;
 use App\Statement_data;
 use App\Prescription;
+use App\Bookedmeeting;
 
 
 class StatementController extends Controller
@@ -24,16 +25,18 @@ class StatementController extends Controller
         return view('statement.index', compact('patients','prescs'));
     }
 
-    public function index_int($diagnosis_id)
+    public function index_int($meetingid, $patientid)
     {
-        $patients = User::select('id', 'name')
-        ->where('user_type','User')
-        ->get();
+        $patient = User::select('id', 'name')
+        ->whereId($patientid)
+        ->first();
 
         $prescs = Prescription::select('id', 'name')
         ->get();
 
-        return view('statement.index_int', compact('patients','prescs','diagnosis_id'));
+        $this->debug_to_console($patient);
+
+        return view('statement.index_int', compact('prescs','meetingid','patient'));
     }
 
     public function statement_history()
@@ -101,6 +104,40 @@ class StatementController extends Controller
         }
         
         return redirect()->route('statement.index')
+                        ->with('success','Prescription statement saved successfully.');
+    }
+
+    public function store_statement_int(Request $request, $patientid, $meetingid)
+    {
+        $request->validate([
+            'dentist_id' => 'required',
+            'patient_id' => 'required',
+            'date' => 'required',
+            'presc_id' => 'required',
+            'qty' => 'required',
+            'remark' => 'required',
+        ]);
+
+        $statement = $request->only('dentist_id','patient_id','patient_name','date');
+        $data = $request->only('item_id','presc_id','qty','remark');
+
+        $new = Statement::create($statement);
+
+        $latest_id = $new->id;
+
+        $d = [];
+        for($i=0;$i<count($data['item_id']);$i++)
+        {
+        $d[]= array ('statement_id'=>$latest_id,
+                        'presc_id'=>$data['presc_id'][$i],
+                        'qty'=>$data['qty'][$i],
+                        'remark'=>$data['remark'][$i]);
+        Statement_data::create($d[$i]);
+        }
+
+        Bookedmeeting::where('id', $meetingid)->update(['statement_id' => $latest_id, 'status' => "Completed"]);
+        
+        return redirect()->route('pages.meeting.updatestatus')
                         ->with('success','Prescription statement saved successfully.');
     }
 

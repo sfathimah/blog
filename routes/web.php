@@ -126,21 +126,20 @@ Route::post('/pages/meeting/book/{dentistid}/{date}/{slot}/{service}/{symptom}',
 
 /** for diagnosis - Dentist */
 Route::get('/dentist/diagnosis', 'DiagnosisController@index')->name('diagnosis.index');
-Route::get('/dentist/diagnosis_int', 'DiagnosisController@index_int')->name('diagnosis.index_int');
+Route::get('/dentist/diagnosis_int/{meetingid}/{patientid}', 'DiagnosisController@index_int')->name('diagnosis.index_int');
 Route::get('/get_symptoms_list','DiagnosisController@sympList_json');
 Route::get('/dentist/get_cond_suggest/{sel_symp}','DiagnosisController@cond_suggest');
 Route::get('/get_conditions_list','DiagnosisController@condList_json');
 Route::get('/dentist/get_presc_suggest/{sel_cond}','DiagnosisController@presc_suggest');
 Route::get('/get_prescriptions_list','DiagnosisController@prescList_json');
 Route::post('/dentist/diagnosis/store_diagnosis', 'DiagnosisController@store_diagnosis')->name('diagnosis.store_diagnosis'); 
-Route::post('/dentist/diagnosis/store_diagnosis_int', 'DiagnosisController@store_diagnosis_int')->name('diagnosis.store_diagnosis_int'); 
+Route::post('/dentist/diagnosis/store_diagnosis_int/{patientid}/{meetingid}', 'DiagnosisController@store_diagnosis_int')->name('diagnosis.store_diagnosis_int'); 
 
 /** for statement - Dentist */
 Route::get('/dentist/statement', 'StatementController@index')->name('statement.index');
-Route::get('/dentist/statement_int/{id}', 'StatementController@index_int')->name('statement.index_int');
+Route::get('/dentist/statement_int/{meetingid}/{patientid}', 'StatementController@index_int')->name('statement.index_int');
 Route::post('/dentist/statement/store_statement', 'StatementController@store_statement')->name('statement.store_statement'); 
-Route::post('/dentist/statement/store_statement_int', 'StatementController@store_statement_int')->name('statement.store_statement_int'); 
+Route::post('/dentist/statement/store_statement_int/{patientid}/{meetingid}', 'StatementController@store_statement_int')->name('statement.store_statement_int'); 
 Route::get('/statement/history', 'StatementController@statement_history')->name('statement.history');
 Route::get('/dentist/statement/history', 'StatementController@dentist_statement_history')->name('statement.dentist_history');
-// Route::get('/dentist/statement/view/{id}', 'StatementController@view_data_modal')->name('statement.view_data_modal');
 Route::get('/statement/view/{id}', 'StatementController@view_data_modal')->name('statement.view_data_modal');
