@@ -57,7 +57,7 @@
                     <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="insertdata"></div>
+                    <div id="insertdata"  style="color: white;"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
@@ -82,7 +82,7 @@ console.log("click");
             var rows; 
             for (let i = 0; i < data.data.length; i++) {
                 rows += '<tr><th scope="row">'+ [i+1] + '</th>' +
-                '<td>' + data.data[i].presc_id + '</td>' +
+                '<td>' + data.data[i].presc_name + '</td>' +
                 '<td>' + data.data[i].qty + '</td>' +
                 '<td>' + data.data[i].remark + '</td>' +
                 '</tr>';
