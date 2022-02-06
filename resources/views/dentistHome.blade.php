@@ -138,7 +138,7 @@
                                 <tr class="align-middle">
                                     @php
                                     $list =
-                                    DB::table('Bookedmeetings')->where('dentistid',$user)->where('status','Pending')->orderBy('date',
+                                    DB::table('Bookedmeetings')->where('dentistid',$user)->where('status','Completed')->orderBy('date',
                                     'asc')->take(3)->get();
                                     $i = 1;
                                     @endphp

@@ -51,6 +51,10 @@
                                     $bg='bg-warning';
                                     $text='text-warning';
                                     }
+                                    else if($i=='Completed'){
+                                    $bg='bg-success';
+                                    $text='text-success';
+                                    }
                                     else{
                                     $bg='bg-danger';
                                     $text='text-danger';

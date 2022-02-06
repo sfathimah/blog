@@ -11,7 +11,12 @@
 </button>
 <ul class="c-header-nav mfs-auto">
 <ul class="header-nav me-4">
-    <label>Welcome!</label>
+<?php
+    $userid = \Auth::user()->id;
+    $user = DB::table('users')->where('id',$userid)->first();
+    $username = $user->name;
+    ?>
+    <label>Welcome! {{$username}}</label>
 </ul>
 </ul>
 <ul class="c-header-nav">

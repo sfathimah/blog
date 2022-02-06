@@ -84,32 +84,47 @@ class MeetingController extends Controller
                 }
             }
 
-            $count1 = 0;
-            for($i = 0; $i< count($listofslots); $i++)
+            if($listofslots == null)
             {
-                $Meetingslot = Meetingslot::where('date', $request->date)->where('dentistid', $listofslots[$i]["DentistID"])->get();
-                $User = User::where('id', $listofslots[$i]["DentistID"])->first();
-                foreach($Meetingslot as $Meetingslots)
+                return view('pages.meeting.index')->with('errorMsg','No Dentist is available on selected date.');
+            }
+            else
+            {
+                $count1 = 0;
+                for($i = 0; $i< count($listofslots); $i++)
                 {
-                    if($Meetingslots->booked == 0)
+                    $Meetingslot = Meetingslot::where('date', $request->date)->where('dentistid', $listofslots[$i]["DentistID"])->get();
+                    $User = User::where('id', $listofslots[$i]["DentistID"])->first();
+                    foreach($Meetingslot as $Meetingslots)
                     {
-                        $realslot[$count1]["dentistid"] = $Meetingslots->dentistid;
-                        $realslot[$count1]["name"] = $User->name;
-                        $realslot[$count1]["slot"] = $Meetingslots->slot;
-                        $count1++;
+                        if($Meetingslots->booked == 0)
+                        {
+                            $realslot[$count1]["dentistid"] = $Meetingslots->dentistid;
+                            $realslot[$count1]["name"] = $User->name;
+                            $realslot[$count1]["slot"] = $Meetingslots->slot;
+                            $count1++;
+                        }
                     }
                 }
+
+                if($realslot == null)
+                {
+                    return view('pages.meeting.index')->with('errorMsg','No Dentist is available on selected date.');
+                }
+                else
+                {
+                    //$User = User::where('user_type','Dentist')->get();
+                    $symptom = $request->sel_symp;
+                    $date = $request-> date;
+                    $service = $request-> service;
+                    //dd($realslot);
+                    
+                    //$respond = ["limit"=>$limit, "listofslots"=>$listofslots, "realslot"=>$realslot];
+                    //dd($respond);
+                    return view('pages.meeting.bookslot', compact('realslot', 'date', 'service', 'symptom'));
+                }
             }
-            //$User = User::where('user_type','Dentist')->get();
-            $symptom = $request->sel_symp;
-            $date = $request-> date;
-            $service = $request-> service;
-            
-            //return $respond = ["symptom"=>$symptom , "Workschedule"=> $Workschedule, "realslot"=>$realslot];
-            return view('pages.meeting.bookslot', compact('realslot', 'date', 'service', 'symptom'));
         }
-        
-    
     }
 
     public function book(Request $request, $dentistid, $date, $slot, $service, $symptom)
@@ -157,7 +172,7 @@ class MeetingController extends Controller
         //4. change booked to 1 for the slot
         
         $update_booked = Meetingslot::where('dentistid', $dentistid)->where("date", $date)->where("slot", $slot)->update(['booked' => 1]);
-        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->get();
+        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->orderBy('date','desc')->get();
         return view('pages.meeting.meetingstatus', compact('Bookedmeeting'))->with('successMsg','Meeting has been booked .');
 
         //return $respond = ["service_wl"=>$service_wl,"dentist_wl"=>$dentist_wl,"new_dentist_wl"=>$new_dentist_wl , "symptomlist"=> $symptomlist];
@@ -191,7 +206,7 @@ class MeetingController extends Controller
         //5. delete booked meeting
         //$cancel= Bookedmeeting::where('id', $Bookedmeeting->id)->first();
         //6. return
-        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->get();
+        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->orderBy('date','desc')->get();
         return view('pages.meeting.meetingstatus', compact('Bookedmeeting'))->with('successMsg','Meeting has been cancelled .');
 
     }
@@ -210,21 +225,21 @@ class MeetingController extends Controller
     {
         $dentistid = Auth::id();
         $Bookedmeetingid = Bookedmeeting::findOrFail($id);   
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->get();
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
         return view('pages.meeting.viewupdate', compact('Bookedmeetingid', $dentistid, 'Bookedmeeting'));
     }
 
     public function meetingstatus()
     {
         $patientid = Auth::id();
-        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->orderBy('date','asc')->get();
+        $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->orderBy('date','desc')->get();
         return view('pages.meeting.meetingstatus', compact('Bookedmeeting'));
     }
 
     public function updatestatus()
     {
         $dentistid = Auth::id();
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','asc')->get();
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
         return view('pages.meeting.updatestatus', compact('Bookedmeeting'));
     }
 
@@ -254,7 +269,7 @@ class MeetingController extends Controller
         //5. delete booked meeting
         $cancel= Bookedmeeting::where('id', $Bookedmeeting->id)->first();
         //6. return
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->get();
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
         return view('pages.meeting.updatestatus', compact('Bookedmeeting'))->with('successMsg','Meeting has been rejected .');
 
 
@@ -266,7 +281,7 @@ class MeetingController extends Controller
         $dentistid = Auth::id();
         $Bookedmeetings =Bookedmeeting::find($id);
         $Bookedmeetings->update(['status'=> 'Approved']);
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->get();
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
         return view('pages.meeting.updatestatus', compact('Bookedmeeting'))->with('successMsg','Meeting has been accepted .');
 
     }

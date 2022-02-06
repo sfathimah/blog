@@ -25,19 +25,29 @@
                         <div class="tab-pane active" id="service" role="tabpanel">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php
-                                    $status = $Bookedmeetingid->status;
-                                    $color = ""; 
-                                    switch($status){
-                                        case "Approved":
-                                        case "Booked": $color="#2C87F0"; break;
-                                        case "Completed": $color="#32CD32"; break;
-                                        case "Pending": $color="#d9e2ef"; break;
-                                        case "Cancelled": $color="#FFB300"; break;	
-                                        case "Rejected": $color="#d9534f"; break;
-                                        default : $color="blue";
+                                @php $i=$Bookedmeetingid->status;@endphp
+                                    @php
+                                    if($i=='Approved'){
+                                    $bg='bg-primary';
+                                    $text='text-primary';
                                     }
-                                    ?>
+                                    else if($i=='Pending'){
+                                    $bg='bg-secondary';
+                                    $text='text-secondary';
+                                    }
+                                    else if($i=='Cancelled'){
+                                    $bg='bg-warning';
+                                    $text='text-warning';
+                                    }
+                                    else if($i=='Completed'){
+                                    $bg='bg-success';
+                                    $text='text-success';
+                                    }
+                                    else{
+                                    $bg='bg-danger';
+                                    $text='text-danger';
+                                    }
+                                    @endphp
                                     <table class="table align-items-center table-flush">
                                         <tr>
                                             <th>Appointment Date</th>
@@ -61,7 +71,7 @@
                                         </tr>
                                         <tr>
                                             <th>Status</th>
-                                            <td class="font-weight-bold" style="color:{{$color}};">{{$Bookedmeetingid->status}}</td>
+                                            <td class="font-weight-bold {{$text}}">{{$Bookedmeetingid->status}}</td>
                                         </tr>
                                     </table>
                                 </div>

@@ -91,7 +91,6 @@ class PageController extends Controller
     public function records($id)
     {
         $records = Record::where('patientID',$id )->first();
-        //return $records;
 
         return view('pages.records', compact('records'));
 
@@ -125,7 +124,7 @@ class PageController extends Controller
             'al' => 'required',
             'ot' => 'required',
         ]);
-        $records = Record::findOrFail($id);   
+        $records = Record::where('patientID',$id)->first();   
         $records->update($request->all());
 
         $users = User::select('id', 'name', 'email')

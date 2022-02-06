@@ -38,13 +38,21 @@
                                     @foreach ($Bookedmeeting as $Bookedmeetings)
                                     @php $i=$Bookedmeetings->status;@endphp
                                     @php
-                                    if($i=='Accepted'){
-                                    $bg='bg-success';
-                                    $text='text-success';
+                                    if($i=='Approved'){
+                                    $bg='bg-primary';
+                                    $text='text-primary';
                                     }
                                     else if($i=='Pending'){
+                                    $bg='bg-secondary';
+                                    $text='text-secondary';
+                                    }
+                                    else if($i=='Cancelled'){
                                     $bg='bg-warning';
                                     $text='text-warning';
+                                    }
+                                    else if($i=='Completed'){
+                                    $bg='bg-success';
+                                    $text='text-success';
                                     }
                                     else{
                                     $bg='bg-danger';
@@ -94,13 +102,13 @@
                                                 @method('POST')
 
                                                 @php
-                                                if($Bookedmeetings->status == "Cancelled")
+                                                if($Bookedmeetings->status == "Pending" || $Bookedmeetings->status == "Approved")
                                                 {
-                                                $class = 'invisible ';
+                                                $class = 'visible ';
                                                 }
                                                 else
                                                 {
-                                                $class = 'visible';
+                                                $class = 'invisible';
                                                 }
                                                 @endphp
                                                 <button type="button" data-coreui-toggle="modal"
