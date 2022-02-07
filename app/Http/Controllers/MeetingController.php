@@ -151,9 +151,17 @@ class MeetingController extends Controller
         $symptomlist = "";
         for($i=0; $i<count($symp_arr); $i++)
         {
-            // $symp = Symptom::where('id', $symp_arr[$i])->first();
-            // $sympname = $symp->name;
-            $symptomlist = $symptomlist.$symp_arr[$i].", ";
+            if(is_numeric($symp_arr[$i]))
+            {
+                $symp = Symptom::where('id', $symp_arr[$i])->first();
+                $sympname = $symp->name;
+                $symptomlist = $symptomlist.$sympname.", "; 
+            }
+            else
+            {
+                $symptomlist = $symptomlist.$symp_arr[$i].", "; 
+            }
+            
         }
         $getdentistname = User::where('id', $dentistid)->first();
         $dentistname = $getdentistname->name;
