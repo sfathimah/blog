@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('third_party_stylesheets')
 
@@ -62,7 +62,7 @@
             <table class="table table-responsive-sm xtable-bordered">
                 <thead>
                     <tr>
-                        <th>Symptom</th>
+                        <th>Presription</th>
                         <th>CF Value</th>
                         <th class="text-center">Action</th>
                     </tr>
