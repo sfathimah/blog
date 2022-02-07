@@ -326,7 +326,7 @@
                                 <tr>
                                     <td>
                                         <select id="selpatients" onchange="myFunction()" class="form-select" name="patient_id" aria-label="Default select example" required>
-                                            <option>Select Patient</option>
+                                            <option value="">Select Patient</option>
                                             @foreach ($patients as $patient)
                                             <option value="{{ $patient->id }}">{{ $patient->name }}</option>
                                             @endforeach
