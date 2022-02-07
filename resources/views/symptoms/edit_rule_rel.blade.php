@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('third_party_stylesheets')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
@@ -30,7 +30,6 @@
                     <a class="btn btn-dark cil-arrow-thick-left" href="{{ URL::previous() }}"></a>
                 </div>
                 <div class="col-11">
-</div>
                     Edit Symptom Related to <span style="color:#0585f2;">{{$condition->name}}</span>
                 </div>
             </div>

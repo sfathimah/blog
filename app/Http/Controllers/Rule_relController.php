@@ -118,6 +118,6 @@ class Rule_relController extends Controller
         $cond_presc->delete();
   
         return redirect()->route('rule_rels.manage_cond_presc', $condition)
-                        ->with('success','Related Symptom deleted successfully');
+                        ->with('success','Related Treatment/ Prescription & CF deleted successfully');
     }
 }
