@@ -23,6 +23,7 @@
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: rgba(44, 56, 74, 0.95);
 }
+
 </style>
 @endpush('page_css')
 
@@ -125,10 +126,10 @@
                             <td class="text-center">
                             <form action="{{ route('symptoms.destroy_cond',$condition->id) }}" method="POST">
                                 <div class="xbtn-group" role="group" aria-label="Basic example">
-                                    <a class="btn btn-dark btn-lg cil-playlist-add"
-                                        href="{{ route('symptoms.manage_rule_rel',$condition->id) }}"></a>
-                                        <a class="btn btn-light btn-lg cil-playlist-add"
-                                        href="{{ route('rule_rels.manage_cond_presc',$condition->id) }}"></a>
+                                    <a class="btn btn-dark btn-lg cil-playlist-add font-sm" 
+                                        href="{{ route('symptoms.manage_rule_rel',$condition->id) }}"> Symptom</a>
+                                        <a class="btn btn-light btn-lg cil-playlist-add font-sm"
+                                        href="{{ route('rule_rels.manage_cond_presc',$condition->id) }}"> Prescription</a>
                                         <a class="btn btn-info btn-lg cil-pencil"
                                         href="{{ route('symptoms.edit_cond',$condition->id) }}"></a>
 
