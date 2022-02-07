@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookedmeeting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,7 +29,12 @@ class HomeController extends Controller
 
     public function adminHome()
     {
+        // $list = Bookedmeeting::orderBy('date','desc')->paginate(5)->get();
+
+        // return view('adminHome', compact('list'));
         return view('adminHome');
+
+
     }
 
     public function dentistHome()

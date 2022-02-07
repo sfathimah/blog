@@ -51,12 +51,14 @@ class MeetingController extends Controller
 
     public function search(Request $request)
     {
+        //error validation: ensure that all data is filled
         $request->validate([   
             'date' => 'required',
             'service' => 'required',
             'sel_symp' => 'required',
         ]);
 
+        //error validation: check whether there are any dentist that are on duty on selected date
         $check = Workschedule::where('start', $request->date )->count();
         if($check == 0)
         {
@@ -64,39 +66,50 @@ class MeetingController extends Controller
         }
         else
         {
-            //$User = User::where('user_type','Dentist')->get();
+            //get the max task workload in a day and set the value to limit var
             $Threshold = Threshold::where('id', 1)->first();
             $limit = $Threshold->threshold;
+            //filter the list of dentist available in selected date(remove dentist with workload is already more than limit) 
+            //and sort the list in order of least workload to most workload
             $Workschedule = Workschedule::where('start', $request->date )->where('workload', '<', $limit)->orderBy('workload','asc')->get();
+            //get the row with data for the selected service
             $Appointmentsetting = AppointmentSetting::where('service',$request->service)->first();
             
             $count = 0;
+            //foreach loop for the list of dentist avalable on the date that workload not exceed limit
             foreach($Workschedule as $Workschedules)
             {
+                //add dentists' old wl with the selected task wl
                 $oldwl = $Workschedules->workload;
                 $taskwl = $Appointmentsetting->TaskWorkload;
                 $newwl = $oldwl + $taskwl;
+                //check the new wl wheter it exceed the limit
                 if($newwl < $limit)
                 {
+                    //only add dentist who do not exceed limit to new array
                     $listofslots[$count]["DentistID"] = $Workschedules-> DentistID;
                     $listofslots[$count]["workload"] = $Workschedules-> workload;
                     $count++;
                 }
             }
-
+            //error validation: if there are no available slots after filtering, then return with a message
             if($listofslots == null)
             {
                 return view('pages.meeting.index')->with('errorMsg','No Dentist is available on selected date.');
             }
+            //if there are still availble slots, continue
             else
             {
                 $count1 = 0;
+                //check which slots of the dentist are available 
                 for($i = 0; $i< count($listofslots); $i++)
                 {
+                    //for each iteration of the array, get the slots
                     $Meetingslot = Meetingslot::where('date', $request->date)->where('dentistid', $listofslots[$i]["DentistID"])->get();
                     $User = User::where('id', $listofslots[$i]["DentistID"])->first();
                     foreach($Meetingslot as $Meetingslots)
                     {
+                        //check if slots has already been booked, if yes, will not be added to new array
                         if($Meetingslots->booked == 0)
                         {
                             $realslot[$count1]["dentistid"] = $Meetingslots->dentistid;
@@ -106,14 +119,14 @@ class MeetingController extends Controller
                         }
                     }
                 }
-
+                //error validation: check if no slots available after filtering, if none are available, return to page with message
                 if($realslot == null)
                 {
                     return view('pages.meeting.index')->with('errorMsg','No Dentist is available on selected date.');
                 }
                 else
                 {
-                    //$User = User::where('user_type','Dentist')->get();
+                    //send data to page for saving when user booked the slot
                     $symptom = $request->sel_symp;
                     $date = $request-> date;
                     $service = $request-> service;
@@ -131,7 +144,7 @@ class MeetingController extends Controller
     {
         $patientid = Auth::id();
 
-        // use of explode
+        // use of explode to change array to string
         $string = $symptom;
         $symp_arr = explode (",", $string); 
         
@@ -140,11 +153,11 @@ class MeetingController extends Controller
         {
             // $symp = Symptom::where('id', $symp_arr[$i])->first();
             // $sympname = $symp->name;
-            $symptomlist = $symptomlist.$symp_arr[$i].",";
+            $symptomlist = $symptomlist.$symp_arr[$i].", ";
         }
         $getdentistname = User::where('id', $dentistid)->first();
         $dentistname = $getdentistname->name;
-        //1. create meeting
+        //1. create meeting (save to db)
         Bookedmeeting::create(
             [
                 'patientid' => $patientid, 
@@ -157,7 +170,7 @@ class MeetingController extends Controller
                 'status' => "Pending" 
             ]);
         
-        //2. get selected service workload
+        //2. get selected service workload 
         
         $getservice = Appointmentsetting::where('service',$service)->first();
         $service_wl = $getservice-> TaskWorkload;
@@ -235,12 +248,24 @@ class MeetingController extends Controller
         $Bookedmeeting = Bookedmeeting::where('patientid',$patientid )->orderBy('date','desc')->get();
         return view('pages.meeting.meetingstatus', compact('Bookedmeeting'));
     }
-
     public function updatestatus()
     {
         $dentistid = Auth::id();
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->paginate(5);
         return view('pages.meeting.updatestatus', compact('Bookedmeeting'));
+    }
+    
+    public function adminview()
+    {
+        $Bookedmeeting = Bookedmeeting::orderBy('updated_at','desc')->paginate(5);
+        return view('pages.meeting.adminview')->with('Bookedmeeting', $Bookedmeeting);
+    }
+
+    public function adminviewdetails($id)
+    {
+        $Bookedmeetingid = Bookedmeeting::findOrFail($id);   
+        
+        return view('pages.meeting.adminviewdetails', compact('Bookedmeetingid'));
     }
 
     public function reject(Bookedmeeting $Bookedmeeting)

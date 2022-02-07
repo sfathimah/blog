@@ -121,6 +121,8 @@ Route::get('/pages/meeting/view/{id}', 'MeetingController@view')->name('pages.me
 Route::get('/pages/meeting/viewupdate/{id}', 'MeetingController@viewupdate')->name('pages.meeting.viewupdate');
 //Route::post('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
 Route::get('/pages/meeting/meetingstatus', 'MeetingController@meetingstatus')->name('pages.meeting.meetingstatus');
+Route::get('/pages/meeting/adminviewdetails/{id}', 'MeetingController@adminviewdetails')->name('pages.meeting.adminviewdetails');
+Route::get('/pages/meeting/adminview', 'MeetingController@adminview')->name('pages.meeting.adminview');
 Route::get('/pages/meeting/updatestatus', 'MeetingController@updatestatus')->name('pages.meeting.updatestatus');
 Route::post('/pages/meeting/book/{dentistid}/{date}/{slot}/{service}/{symptom}', 'MeetingController@book')->name('pages.meeting.book');
 

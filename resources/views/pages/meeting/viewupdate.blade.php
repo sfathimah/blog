@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('pages.meeting.meetingstatus') }}">Update Meeting Status</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('pages.meeting.updatestatus') }}">Update Meeting Status</a></li>
     <li class="breadcrumb-item active">View Meeting Details</li>
 
 </ol>
@@ -77,7 +77,7 @@
                                         </tr>
                                         <tr>
                                             <th>Status</th>
-                                            <td class="font-weight-bold {{$text}}">{{$Bookedmeetingid->status}}</td>
+                                            <td class="font-weight-bold {{$text}}">{{$Bookedmeetingid->status}} <span class="font-weight-light" style="color:black">on {{$Bookedmeetingid->updated_at}}</span></td>
                                         </tr>
                                     </table>
                                     </div>

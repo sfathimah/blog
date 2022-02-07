@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('breadcrumb')
 <ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('pages.meeting.meetingstatus') }}">Update Meeting Status</a></li>
-    <li class="breadcrumb-item active">View Meeting Details</li>
+    <li class="breadcrumb-item"><a href="{{ route('pages.meeting.adminview') }}">View Overall Appointment</a></li>
+    <li class="breadcrumb-item active">View Selected Appointment Details</li>
 
 </ol>
 @endsection
@@ -48,6 +48,11 @@
                                     $text='text-danger';
                                     }
                                     @endphp
+                                    @php
+                                    $patientid = $Bookedmeetingid-> patientid;
+                                    $patient = DB::table('users')->where('id',$patientid)->first();
+                                    $patientname = $patient-> name;
+                                    @endphp
                                     <table class="table align-items-center table-flush">
                                         <tr>
                                             <th>Appointment Date</th>
@@ -70,14 +75,17 @@
                                             <td>{{$Bookedmeetingid->dentistname}}</td>
                                         </tr>
                                         <tr>
+                                            <th>Patient Name</th>
+                                            <td>{{$patientname}}</td>
+                                        </tr>
+                                        <tr>
                                             <th>Status</th>
                                             <td class="font-weight-bold {{$text}}">{{$Bookedmeetingid->status}} <span class="font-weight-light" style="color:black">on {{$Bookedmeetingid->updated_at}}</span></td>
-                                            
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="text-right">
-                                    <a  href="{{ route('pages.meeting.meetingstatus') }}" class="btn btn-success mt-4">Back</a>
+                                    <a  href="{{ route('pages.meeting.adminview') }}" class="btn btn-success mt-4">Back</a>
                                 </div>
 
                             </div>
