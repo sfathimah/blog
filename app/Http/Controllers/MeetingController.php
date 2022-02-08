@@ -259,7 +259,7 @@ class MeetingController extends Controller
     public function updatestatus()
     {
         $dentistid = Auth::id();
-        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->paginate(5);
+        $Bookedmeeting = Bookedmeeting::where('dentistid',$dentistid )->orderBy('date','desc')->get();
         return view('pages.meeting.updatestatus', compact('Bookedmeeting'));
     }
     
