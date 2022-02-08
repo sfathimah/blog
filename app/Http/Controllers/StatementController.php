@@ -112,14 +112,14 @@ class StatementController extends Controller
 
     public function store_statement_int(Request $request, $patientid, $meetingid)
     {
-        $request->validate([
+        if($request->validate([
             'dentist_id' => 'required',
             'patient_id' => 'required',
             'date' => 'required',
-            'presc_id' => 'required',
-            'qty' => 'required',
-            'remark' => 'required',
-        ]);
+            // 'presc_id' => 'required',
+            // 'qty' => 'required',
+            // 'remark' => 'required',
+        ]));
 
         $statement = $request->only('dentist_id','patient_id','patient_name','date');
         $data = $request->only('item_id','presc_id','qty','remark');
@@ -128,14 +128,17 @@ class StatementController extends Controller
 
         $latest_id = $new->id;
 
-        $d = [];
-        for($i=0;$i<count($data['item_id']);$i++)
-        {
-        $d[]= array ('statement_id'=>$latest_id,
-                        'presc_id'=>$data['presc_id'][$i],
-                        'qty'=>$data['qty'][$i],
-                        'remark'=>$data['remark'][$i]);
-        Statement_data::create($d[$i]);
+        if(array_key_exists("item_id",$data)){
+
+            $d = [];
+            for($i=0;$i<count($data['item_id']);$i++)
+            {
+            $d[]= array ('statement_id'=>$latest_id,
+                            'presc_id'=>$data['presc_id'][$i],
+                            'qty'=>$data['qty'][$i],
+                            'remark'=>$data['remark'][$i]);
+            Statement_data::create($d[$i]);
+            }
         }
 
         Bookedmeeting::where('id', $meetingid)->update(['statement_id' => $latest_id, 'status' => "Completed"]);

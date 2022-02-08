@@ -114,11 +114,16 @@
                                                 @endphp
 
                                                 @foreach ($sel_symps as $sel_symp)
-                                                    @php
-                                                    $symp = DB::table('symptoms')->where('id',$sel_symp)->first();
-                                                    @endphp
+                                                    @if (is_numeric($sel_symp))
+                                                        @php
+                                                        $symp = DB::table('symptoms')->where('id',$sel_symp)->first();
+                                                        @endphp
 
                                                     {{$symp->name}}<br>
+                                                    @else
+                                                    {{$sel_symp}}<br>
+
+                                                    @endif
                                                 @endforeach
 
                                                 </td>
